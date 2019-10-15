@@ -12,7 +12,7 @@ export interface League {
 
     rosterSettings: RosterSettings;
 
-    scheduleSettings: ScheduleSettings;
+    scheduleSettings: LeagueMap;
 }
 
 export interface DraftSettings {
@@ -32,13 +32,10 @@ export interface LeagueMap {
 
 export interface RosterSettings {
     
+    //TODO: Create object for these
     lineupPostionCount: object;
     
     positionLimits: object;
     
     //locktime: LINEUP_LOCK_TIMES;
-}
-
-export interface ScheduleSettings {
-    id: number;
 }
