@@ -1,4 +1,5 @@
 export interface Player {
+  percentChange: any;
     //TODO: Finish this
     //http://espn-fantasy-football-api.s3-website.us-east-2.amazonaws.com/Player.html
 

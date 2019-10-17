@@ -4,6 +4,8 @@ import { BoxscoreService } from '../../model/services/boxscore.service';
 import { Boxscore } from 'src/app/model/models/boxscore.model';
 import { LeagueService } from 'src/app/model/services/league.service';
 import { League, DraftSettings, RosterSettings, LeagueMap } from 'src/app/model/models/league.model';
+import {FreeAgentService} from "../../model/services/free-agent.service";
+import {FreeAgentPlayer} from "../../model/models/free-agent-player.model";
 
 @Component({
   selector: 'app-test',
@@ -12,7 +14,7 @@ import { League, DraftSettings, RosterSettings, LeagueMap } from 'src/app/model/
 })
 export class TestComponent implements OnInit {
   myClient;
-  constructor(private boxscoreService: BoxscoreService, private leagueService: LeagueService) {
+  constructor(private boxscoreService: BoxscoreService, private leagueService: LeagueService, private freeAgentService: FreeAgentService) {
     this.myClient = new Client({leagueId: 58438855});
    }
 
@@ -20,6 +22,7 @@ export class TestComponent implements OnInit {
     //this.getBoxscores(2019, 4, 4);
     //this.getLeagueInfo(2019);
     //this.getHistoricalScoreboardForWeek(2019, 2, 2);
+    //this.getFreeAgents(2019, 1);
   }
 
   //Get all boxscores for the week
@@ -77,6 +80,24 @@ export class TestComponent implements OnInit {
 
     })
   }
+
+  //Get list of all free agents for week
+  getFreeAgents(seasonId: number, scoringPeriodId: number){
+    this.freeAgentService.getFreeAgents(seasonId, scoringPeriodId).subscribe(data => {
+      let freeAgents: FreeAgentPlayer[] = data;
+      freeAgents.sort( function(a, b) {return b.player.percentChange - a.player.percentChange });
+      freeAgents.forEach(freeAgent =>{
+        console.log(freeAgent);
+      })
+      console.log(data);
+    })
+  }
+
+  //Get list of all teams for week
+  getTeamsAtWeek(seasonId: number, scoringPeriodId: number){
+
+  }
+
 
 }
 
