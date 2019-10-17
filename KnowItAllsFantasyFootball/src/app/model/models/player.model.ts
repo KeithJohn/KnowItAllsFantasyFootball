@@ -1,93 +1,119 @@
+import { AvailabilityStatus } from '../enums/availability-status.enum';
+import { InjuryStatus } from '../enums/injury-status.enum';
+
 export interface Player {
-  percentChange: any;
-    //TODO: Finish this
-    //http://espn-fantasy-football-api.s3-website.us-east-2.amazonaws.com/Player.html
+  /**
+   * Availability status of the player.
+   * Options:
+   *  'ONTEAM': Currently on a fantasy team
+   *  'FREEAGENT': Currently a fantasy free agent
+   *  'NONE': Unavailable in fantasy
+   */
+  availabilityStatus: AvailabilityStatus
 
-    /**
-     * Availability status of the player
-     * Options:
-     *  'ONTEAM': Currently on a team
-     */
+  /**
+   * Default position of the player.
+   */
+  defaultPosition: String
 
-    //TODO: change to an enum
-    availabilityStatus: String
+  /**
+   * Eligible Positions of the player.
+   */
+  eligiblePositions: String[];
 
-    /**
-     * Default position of the player
-     */
-    //TODO: Change to an enum
-    defaultPosition: String
+  /**
+   *  First name of the player.
+   */
+  firstName: String;
 
-    /**
-     * Eligible Positions of the player
-     */
-    //TODO: Maybe change the class to an enum
-    //eligiblePositions: PlayerPosition[];
+  /**
+   *  Full name of the player.
+   */
+  fullName: String;
 
-    /**
-     *  First name of the player
-     */
+  /**
+   *  Id of the player.
+   */
+  id: number;
 
-    firstName: String;
+  /**
+   * Injury status of the player.
+   * Options:
+   *  'ACTIVE'
+   *  'BEREAVEMENT' 
+   *  'DAY_TO_DAY'
+   *  'DOUBTFUL'
+   *  'FIFTEEN_DAY_DL' 
+   *  'INJURY_RESERVE' 
+   *  'OUT' 
+   *  'PATERNITY' 
+   *  'PROBABLE' 
+   *  'QUESTIONABLE' 
+   *  'SEVEN_DAY_DL' 
+   *  'SIXTY_DAY_DL' 
+   *  'SUSPENSION'
+   *  'TEN_DAY_DL'   
+   */
+  injuryStaus: InjuryStatus;
 
-    /**
-     *  Full name of the player
-     */
+  /**
+   *  Boolean representing whether or not the player is droppable.
+   */
+  isDroppable: boolean;
+  
+  /**
+   *  Boolean representing whether or not the player is injured.
+   */
+  isInjured: boolean;
 
-    fullName: String;
+  /**
+   * Jersey Number of the player. May not be used anymore.
+   */
+  jerseyNumber?: number;
 
-    /**
-     *  Id of the player
-     */
+  /**
+   *  Last Name of the player.
+   */
+  lastName: String;
 
-    id: number;
+  /**
+   * Professional team that the player is on.
+   */
+  proTeam: String;
 
-    /**
-     * Injury status of the player
-     */
-    //TODO: Change to an enum
-    injuryStaus: String;
+  /**
+   *  Abbreviation of the professional team that the player is on.
+   */
+  proTeamAbbreviation: String;
 
-    /**
-     *  Boolean representing whether or not the player is droppable
-     */
+  /**
+   *  Id of the season the player info is from.
+   */
+  seasonId: number;
 
-    isDroppable: boolean;
-    
-    /**
-     *  Boolean representing whether or not the player is injured
-     */
+  /**
+   *  Average auction value of the player.
+   */
+  auctionVauleAverage?: number; 
 
-    isInjured: boolean;
+  /**
+   *  Average position the player was drafted.
+   */
+  averageDraftPosition?: number;
 
-    /**
-     * Jersey Number of the player. May not be used anymore
-     */
+  /**
+   *  Percent of change in terms of adding or dropping from teams. 
+   *    If the player was added the number will be positive, negative if dropped. 
+   */
+  percentChange?: number;
 
-    jerseyNumber?: number;
+  /**
+   *  Percent of leagues in which the player is owned.
+   */
+  percentOwned?: number;
 
-    /**
-     *  Last Name of the player
-     */
-
-    lastName: String;
-
-    /**
-     * Professional team that the player is on
-     */
-
-    proTeam: String;
-
-    /**
-     *  Abbreviation of the professional team that the player is on
-     */
-
-    proTeamAbbreviation: String;
-
-    /**
-     *  Id of the season the player info is from
-     */
-
-    seasonId: number;
-
+  /**
+   * Percentage of leagues in which a team starts this player.
+   */
+  percentStarted?: number; 
 }

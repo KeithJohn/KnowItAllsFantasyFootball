@@ -3,9 +3,11 @@ import { Client } from 'espn-fantasy-football-api/web';
 import { BoxscoreService } from '../../model/services/boxscore.service';
 import { Boxscore } from 'src/app/model/models/boxscore.model';
 import { LeagueService } from 'src/app/model/services/league.service';
-import { League, DraftSettings, RosterSettings, LeagueMap } from 'src/app/model/models/league.model';
+import { League, DraftSettings, RosterSettings, ScheduleSettings} from 'src/app/model/models/league.model';
 import {FreeAgentService} from "../../model/services/free-agent.service";
-import {FreeAgentPlayer} from "../../model/models/free-agent-player.model";
+import { FreeAgent} from "../../model/models/free-agent-player.model";
+import { TeamService } from 'src/app/model/services/team.service';
+import { NflGameService } from 'src/app/model/services/nfl-game.service';
 
 @Component({
   selector: 'app-test',
@@ -14,15 +16,23 @@ import {FreeAgentPlayer} from "../../model/models/free-agent-player.model";
 })
 export class TestComponent implements OnInit {
   myClient;
-  constructor(private boxscoreService: BoxscoreService, private leagueService: LeagueService, private freeAgentService: FreeAgentService) {
+  constructor(
+    private boxscoreService: BoxscoreService, 
+    private leagueService: LeagueService, 
+    private freeAgentService: FreeAgentService, 
+    private teamsService: TeamService,
+    private nflGameService: NflGameService
+  ) {
     this.myClient = new Client({leagueId: 58438855});
-   }
+  }
 
   ngOnInit() {
     //this.getBoxscores(2019, 4, 4);
     //this.getLeagueInfo(2019);
     //this.getHistoricalScoreboardForWeek(2019, 2, 2);
     //this.getFreeAgents(2019, 1);
+    //this.getTeamsAtWeek(2019, 1);
+    //this.getNFLGamesAtPeriod("20191010", "20191018");
   }
 
   //Get all boxscores for the week
@@ -38,9 +48,6 @@ export class TestComponent implements OnInit {
         console.log("Home Team Score: " + boxscore.homeScore);
         console.log("Away Team Id: " + boxscore.awayTeamId);
         console.log("Away Team Score: " + boxscore.awayScore);
-
-        console.log(findWinningTeam(boxscore.homeScore, boxscore.awayScore));
-        console.log("");
       })
     });
   }
@@ -59,7 +66,7 @@ export class TestComponent implements OnInit {
       var leagueInfo: League = data;
       let draftSettings: DraftSettings = leagueInfo.draftSettings;
       let rosterSettings: RosterSettings = leagueInfo.rosterSettings;
-      let scheduleSettings: LeagueMap = leagueInfo.scheduleSettings;
+      let scheduleSettings: ScheduleSettings = leagueInfo.scheduleSettings;
       console.log("-----League Info-----");
       console.log("League name: " + leagueInfo.name);
       console.log("Is public: " + leagueInfo.isPublic);
@@ -84,7 +91,7 @@ export class TestComponent implements OnInit {
   //Get list of all free agents for week
   getFreeAgents(seasonId: number, scoringPeriodId: number){
     this.freeAgentService.getFreeAgents(seasonId, scoringPeriodId).subscribe(data => {
-      let freeAgents: FreeAgentPlayer[] = data;
+      let freeAgents: FreeAgent[] = data;
       freeAgents.sort( function(a, b) {return b.player.percentChange - a.player.percentChange });
       freeAgents.forEach(freeAgent =>{
         console.log(freeAgent);
@@ -95,20 +102,23 @@ export class TestComponent implements OnInit {
 
   //Get list of all teams for week
   getTeamsAtWeek(seasonId: number, scoringPeriodId: number){
+    this.teamsService.getTeamsAtWeek(seasonId, scoringPeriodId).subscribe(data => {
+      console.log(data);
+      
+    })
+  }
 
+  //Get list of all NFL games for period starting and ending with date
+  getNFLGamesAtPeriod(startDate: String, endDate: String){
+    this.nflGameService.getNFLGamesForPeriod(startDate, endDate).subscribe(data => {
+      console.log(data);
+      
+    });
   }
 
 
-}
 
-function findWinningTeam(homeTeamScore: number, awayTeamScore: number): String {
-  if(homeTeamScore > awayTeamScore){
-    return "Home Team Wins";
-  }else if (awayTeamScore > homeTeamScore){
-    return "Away Team Wins";
-  }else {
-    return "It's a tie!";
-  }
+
 }
 
 

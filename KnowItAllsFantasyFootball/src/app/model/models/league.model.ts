@@ -1,41 +1,143 @@
+import { DraftType } from '../enums/draft-type.enum';
+
 export interface League {
-    //TODO: Finish this
-    //http://espn-fantasy-football-api.s3-website.us-east-2.amazonaws.com/League.html
+    
+    /**
+     *  Name of the league
+     */
 
     name: string;
 
+    /**
+     *  Number of teams in the league 
+     */
+
     size: number;
+
+    /**
+     *  Boolean representing whehter or not the league is public. 
+     */
 
     isPublic: boolean;
 
+    /**
+     *  Draft settins for the league
+     */
+
     draftSettings: DraftSettings;
+
+    /**
+     *  Roster settings for the league
+     */
 
     rosterSettings: RosterSettings;
 
-    scheduleSettings: LeagueMap;
+    /**
+     *  Schedule settings for the league
+     */
+
+    scheduleSettings: ScheduleSettings;
 }
 
 export interface DraftSettings {
+    /**
+     *  Date of the draft. 
+     */
+    
     date: Date;
-    //type: DRAFT_TYPE;
+    
+    /**
+     *  Type of the draft.
+     *  Options:
+     *      Offline 
+     *      Snake
+     *      Autopick
+     *      Snail
+     *      Auction
+     */
+    
+    type: DraftType;
+    
+    /**
+     *  Time allowed for each pick. 
+     */
+    
     timePerPick: number;
+    
+    /**
+     *  Boolean representing whether or not teams can trade draft picks.
+     */
+
     canTradeDraftPicks: boolean;
 }
 
-export interface LeagueMap {
+export interface ScheduleSettings {
+    /**
+     *  Number of regular season matchups for the season.
+     */
+    
     numberOfRegularSeasonMatchups: number;
+    
+    /**
+     *  Number of weeks one regular season matchup lasts.
+     */
+    
     regularSeasonMatchupLength: number;
+    
+    /**
+     *  Number of matchups during the league playoffs.
+     */
+    
     numberOfPlayoffMatchups: number;
+    
+    /**
+     *  Number of weeks one playoff matchup lasts.
+     */
+    
     playoffMatchupLength: number;
+    
+    /**
+     *  Number of teams that will make the playoffs.
+     */
+    
     numberOfPlayoffTeams: number;
 }
 
 export interface RosterSettings {
+    /**
+     *  Number of roster spots in a lineup.
+     */
     
-    //TODO: Create object for these
-    lineupPostionCount: object;
+    lineupPostionCount: PositionCount;
     
-    positionLimits: object;
-    
-    //locktime: LINEUP_LOCK_TIMES;
+    /**
+     *  The maximum number of players a team can have for a given position.
+     */
+
+    positionLimits: PositionCount;
+}
+
+export interface PositionCount{
+    Bench: number;
+    CB: number;
+    DST: number;
+    DB: number; 
+    DE: number 
+    DP: number; 
+    DT: number; 
+    HC: number;  
+    IR: number; 
+    LB: number;   
+    OP: number;  
+    P: number;   
+    QB: number;  
+    RB: number;  
+    RBWR?: number;  
+    RBWRTE?: number;  
+    S: number;  
+    TE: number;  
+    TQB: number;  
+    Unknown?: number;  
+    WR: number;  
+    WRTE?: number;  
 }

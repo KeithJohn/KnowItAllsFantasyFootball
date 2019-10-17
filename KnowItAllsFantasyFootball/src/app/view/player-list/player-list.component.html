@@ -1,0 +1,36 @@
+<p>player-list works!</p>
+<style>
+  .toolbar {
+    height: 50px;
+    margin: -8px;
+    display: flex;
+    align-items: center;
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+  }
+</style>
+<!-- Filter bar -->
+    <div class="toolbar" role="banner">
+        <span>Players</span>
+        <div class="spacer"></div>
+        <mat-form-field>
+            <mat-select placeholder="Position">
+                    <mat-option></mat-option>
+                    <mat-option value="QB">QB</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Team">
+                    <mat-option></mat-option>
+                    <mat-option value="QB">QB</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Sort By">
+                    <mat-option></mat-option>
+                    <mat-option value="QB">QB</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+<!-- List -->

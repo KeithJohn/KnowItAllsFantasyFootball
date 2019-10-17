@@ -5,13 +5,14 @@ import { Observable, from } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class LeagueService {
+export class TeamService {
   client;
   constructor() { 
     this.client = new Client({leagueId: 58438855});
   }
 
-  getLeagueInfo(seasonId: number): Observable<any>{
-    return from(this.client.getLeagueInfo({seasonId: seasonId}));
+
+  getTeamsAtWeek(seasonId: number, scoringPeriodId: number): Observable<any>{
+    return from(this.client.getTeamsAtWeek({seasonId: seasonId, scoringPeriodId: scoringPeriodId}));
   }
 }
