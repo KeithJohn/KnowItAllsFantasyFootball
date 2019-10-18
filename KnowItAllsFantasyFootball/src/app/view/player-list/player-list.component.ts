@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {FreeAgentService} from "../../model/services/free-agent.service";
 import {TeamService} from "../../model/services/team.service";
 import {FreeAgent} from "../../model/models/free-agent-player.model";
 import {Team} from "../../model/models/team.model";
 import {Player} from "../../model/models/player.model";
+import { PlayerFilterType } from 'src/app/model/enums/player-filter-type.enum';
 
 
 @Component({
@@ -17,8 +18,9 @@ export class PlayerListComponent implements OnInit {
   players: Player[] = [];
   filteredPlayers: Player[] = [];
 
-  currentPositionFilter: String = "";
-  currentTeamFilter: String = "";
+  currentPositionFilter: String = null;
+  currentTeamFilter: number = null;
+  currentSortType: String = null;
   constructor(private freeAgentService: FreeAgentService, private teamService: TeamService) {
 
   }
@@ -33,8 +35,8 @@ export class PlayerListComponent implements OnInit {
         this.teams = data;
         this.teams.forEach(team => {
           team.roster.forEach(player => {
-            //console.log(player);
             player.teamId = team.id;
+            player.teamName = team.name;
             this.players.push(player);
           })
         })
@@ -42,6 +44,8 @@ export class PlayerListComponent implements OnInit {
         this.freeAgentService.getFreeAgents(seasonId, scoringPeriodId).subscribe(data => {
           let freeAgents: FreeAgent[] = data;
           freeAgents.forEach(freeAgent => {
+            freeAgent.player.teamId = 0;
+            freeAgent.player.teamName = "Free Agent";
             this.players.push(freeAgent.player);
           })
           this.filteredPlayers = this.players;
@@ -49,57 +53,84 @@ export class PlayerListComponent implements OnInit {
       })
   }
 
-  //TODO: When selecting empty selection, remove the filter, but keep others
-  //TODO: Add check that if changing filter for already selected, then remove and add filter
-  //TODO: Learn proper way to do filters/ queries.
+  checkForSelectionChange(filterValue, playerFilterType){
+    
+    if(playerFilterType == PlayerFilterType.Position){
+      //Check if filter value is equal to current position filter
+      if(filterValue != this.currentPositionFilter){
+        this.currentPositionFilter = filterValue;
+        this.filterPlayers(this.currentPositionFilter, this.currentTeamFilter);
+      }
+    }else if(playerFilterType == PlayerFilterType.Team){
+      //Check if filter value is equal to current team filter
+      if(filterValue != this.currentTeamFilter){
+        this.currentTeamFilter = filterValue;
+        this.filterPlayers(this.currentPositionFilter, this.currentTeamFilter);
+      }
+    }else if(playerFilterType == "SORT"){
+      if(filterValue != this.currentSortType){
+        this.currentSortType = filterValue;
+        this.sortPlayers(this.currentSortType);
+      }
+    }
+  }
+  //TODO: Fix sort so that it is correct.
+  //TODO: When refiltering also resort
+  //TODO: 
 
-  filterPosition(position: String){
-    if(position == null){
+  filterPlayers(position: String, teamId: number){
+    this.filteredPlayers = this.players;
+    
+    if(teamId != null){
+      //Filter by team
+      this.filteredPlayers = this.filteredPlayers.filter(player => {
+        return (player.teamId == teamId);
+      })
+    }
 
-      this.filteredPlayers = this.players;
-    }else{
+    if(position != null){
+      //Filter by position
       this.filteredPlayers = this.filteredPlayers.filter(player => {
         return player.eligiblePositions.includes(position);
       })
     }
   }
 
-  filterTeam(teamId: number){
-    if(teamId == null){
-      this.filteredPlayers = this.players;
-    }else{
-      this.filteredPlayers = this.filteredPlayers.filter(player => {
-        return (player.teamId == teamId);
-      });
+  sortPlayers(sortType: String){
+    if(sortType == 'AvgAuctionValue'){
+      this.filteredPlayers.sort(function(a, b){
+        if(a.auctionVauleAverage > b.auctionVauleAverage){
+          return -1;
+        }
+        if(b.auctionVauleAverage > a.auctionVauleAverage){
+          return 1;
+        }
+      })
     }
-    // if(teamId == null){
-    //
-    // }else{
-    //   this.filteredPlayers = this.filteredPlayers.filter(player => {
-    //     return this.isPlayerOnTeam(teamId, player.id);
-    //   })
-    // }
+    if(sortType == 'TransactionTrends'){
+      this.filteredPlayers.sort(function(a, b){return Math.abs(b.percentChange) - Math.abs(a.percentChange)})
+    }
   }
 
-  // isPlayerOnTeam(teamId: number, playerId: number): boolean{
-  //   console.log("Entering isPlayerOnTeam");
-  //   for (var i = 0; i < this.teams.length; i+=1 ){
-  //     console.log("Entering for loop")
-  //     if (this.teams[i].id == teamId) {
-  //       for (var j = 0; j < this.teams[i].roster.length; j+=1){
-  //         if(this.teams[i].roster[j].id == playerId){
-  //           console.log("Returning true");
-  //           return true;
-  //         }
-  //       }
-  //     }
-  //   }
-  //   console.log("Returning false");
-  //   return false;
-  // }
 
-  sortBy(){
-
+  getPosition(player: Player){
+    if(player.eligiblePositions.includes("QB")){
+      return "QB";
+    }else if(player.eligiblePositions.includes("RB")){
+      return "RB";
+    }else if(player.eligiblePositions.includes("WR")){
+      return "WR";
+    }else if(player.eligiblePositions.includes("TE")){
+      return "TE";
+    }else if(player.eligiblePositions.includes("D/ST")){
+      return "D/ST";
+    }else if(player.eligiblePositions.includes("K")){
+      return "K";
+    }
   }
 
+  setPlayer(player:Player){
+    console.log(player);
+    
+  }
 }

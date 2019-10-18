@@ -1,7 +1,7 @@
 import { AvailabilityStatus } from '../enums/availability-status.enum';
 import { InjuryStatus } from '../enums/injury-status.enum';
 
-export interface Player {
+export class Player {
   teamId: number;
   /**
    * Availability status of the player.
@@ -116,5 +116,23 @@ export interface Player {
   /**
    * Percentage of leagues in which a team starts this player.
    */
-  percentStarted?: number; 
+  percentStarted?: number;
+  teamName: String;
+
+  getPosition(): String{
+    if(this.eligiblePositions.includes("QB")){
+      return "QB";
+    }else if(this.eligiblePositions.includes("RB")){
+      return "RB";
+    }else if(this.eligiblePositions.includes("WR")){
+      return "WR";
+    }else if(this.eligiblePositions.includes("TE")){
+      return "TE";
+    }else if(this.eligiblePositions.includes("D/ST")){
+      return "D/ST";
+    }else if(this.eligiblePositions.includes("K")){
+      return "K";
+    }
+  }
+  
 }
