@@ -2,6 +2,7 @@ import { AvailabilityStatus } from '../enums/availability-status.enum';
 import { InjuryStatus } from '../enums/injury-status.enum';
 
 export interface Player {
+  teamId: number;
   /**
    * Availability status of the player.
    * Options:

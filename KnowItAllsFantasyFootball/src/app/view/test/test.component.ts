@@ -17,9 +17,9 @@ import { NflGameService } from 'src/app/model/services/nfl-game.service';
 export class TestComponent implements OnInit {
   myClient;
   constructor(
-    private boxscoreService: BoxscoreService, 
-    private leagueService: LeagueService, 
-    private freeAgentService: FreeAgentService, 
+    private boxscoreService: BoxscoreService,
+    private leagueService: LeagueService,
+    private freeAgentService: FreeAgentService,
     private teamsService: TeamService,
     private nflGameService: NflGameService
   ) {
@@ -30,7 +30,7 @@ export class TestComponent implements OnInit {
     //this.getBoxscores(2019, 4, 4);
     //this.getLeagueInfo(2019);
     //this.getHistoricalScoreboardForWeek(2019, 2, 2);
-    //this.getFreeAgents(2019, 1);
+    this.getFreeAgents(2019, 1);
     //this.getTeamsAtWeek(2019, 1);
     //this.getNFLGamesAtPeriod("20191010", "20191018");
   }
@@ -104,7 +104,7 @@ export class TestComponent implements OnInit {
   getTeamsAtWeek(seasonId: number, scoringPeriodId: number){
     this.teamsService.getTeamsAtWeek(seasonId, scoringPeriodId).subscribe(data => {
       console.log(data);
-      
+
     })
   }
 
@@ -112,7 +112,7 @@ export class TestComponent implements OnInit {
   getNFLGamesAtPeriod(startDate: String, endDate: String){
     this.nflGameService.getNFLGamesForPeriod(startDate, endDate).subscribe(data => {
       console.log(data);
-      
+
     });
   }
 
