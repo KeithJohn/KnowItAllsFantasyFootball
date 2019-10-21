@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {FreeAgentService} from "../../model/services/free-agent.service";
-import {TeamService} from "../../model/services/team.service";
-import {FreeAgent} from "../../model/models/free-agent-player.model";
-import {Team} from "../../model/models/team.model";
-import {Player} from "../../model/models/player.model";
+import {FreeAgentService} from "../../../model/services/free-agent.service";
+import {TeamService} from "../../../model/services/team.service";
+import {FreeAgent} from "../../../model/models/free-agent-player.model";
+import {Team} from "../../../model/models/team.model";
+import {Player} from "../../../model/models/player.model";
 import { PlayerFilterType } from 'src/app/model/enums/player-filter-type.enum';
 
 
@@ -76,7 +76,11 @@ export class PlayerListComponent implements OnInit {
   }
   //TODO: Fix sort so that it is correct.
   //TODO: When refiltering also resort
-  //TODO: 
+  //TODO: Get projected and actual stats for each player somehow.
+  //TODO: Check to see if api only returns some data when we can get more data. 
+  //TODO: Beautify everything
+  //TODO: Fix Duplicate players issue
+
 
   filterPlayers(position: String, teamId: number){
     this.filteredPlayers = this.players;
@@ -98,13 +102,8 @@ export class PlayerListComponent implements OnInit {
 
   sortPlayers(sortType: String){
     if(sortType == 'AvgAuctionValue'){
-      this.filteredPlayers.sort(function(a, b){
-        if(a.auctionVauleAverage > b.auctionVauleAverage){
-          return -1;
-        }
-        if(b.auctionVauleAverage > a.auctionVauleAverage){
-          return 1;
-        }
+      this.filteredPlayers.sort(function(a, b){ 
+          return Math.abs(b.auctionVauleAverage - a.auctionVauleAverage); 
       })
     }
     if(sortType == 'TransactionTrends'){
