@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import {MatListModule, MatDividerModule ,MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule} from '@angular/material/';
+import {MatGridListModule, MatListModule, MatDividerModule ,MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule} from '@angular/material/';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './view/app.component';
@@ -40,7 +40,8 @@ import { HistoryPageComponent } from './view/history-page/history-page.component
     MatSelectModule,
     MatDividerModule,
     MatListModule,
-    ScrollDispatchModule
+    ScrollDispatchModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
