@@ -9,6 +9,8 @@
     font-weight: 600;
   }
 </style>
+
+<!-- TODO: Make filter bar sticky, and non transparent -->
 <!-- Filter bar -->
     <div class="toolbar" role="banner">
         <!-- <span style="padding:5px">Players</span> -->
@@ -43,6 +45,7 @@
         </mat-form-field>
     </div>
 
+    <!-- TODO: Add a div to make this scroll with cool scrollbar -->
     <!-- List -->
     <mat-action-list>
         <button *ngFor="let player of filteredPlayers; let i = index" mat-list-item (click)="setPlayer(player)">{{ player.fullName }}: {{ getPosition(player) }}, {{ player.teamName }}</button>
