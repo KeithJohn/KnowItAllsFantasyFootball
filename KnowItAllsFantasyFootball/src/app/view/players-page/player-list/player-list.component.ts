@@ -1,27 +1,32 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, DefaultIterableDiffer } from '@angular/core';
 import {FreeAgentService} from "../../../model/services/free-agent.service";
 import {TeamService} from "../../../model/services/team.service";
 import {FreeAgent} from "../../../model/models/free-agent-player.model";
 import {Team} from "../../../model/models/team.model";
 import {Player} from "../../../model/models/player.model";
 import { PlayerFilterType } from 'src/app/model/enums/player-filter-type.enum';
+import { QuickSortService } from 'src/app/model/services/quick-sort.service';
+import { SortType } from 'src/app/model/enums/sort-type.enum';
+import { OrderByPipe } from 'src/app/model/pipes/order-by.pipe';
 
 
 @Component({
   selector: 'app-player-list',
   templateUrl: './player-list.component.html',
-  styleUrls: ['./player-list.component.sass']
+  styleUrls: ['./player-list.component.sass'],
+  providers: [OrderByPipe]
 })
 export class PlayerListComponent implements OnInit {
   freeAgents: FreeAgent[] =[];
   teams: Team[] = [];
   players: Player[] = [];
   filteredPlayers: Player[] = [];
+  orderByType;
 
   currentPositionFilter: String = null;
   currentTeamFilter: number = null;
-  currentSortType: String = null;
-  constructor(private freeAgentService: FreeAgentService, private teamService: TeamService) {
+  currentSortType: SortType;
+  constructor(private quickSortService: QuickSortService, private freeAgentService: FreeAgentService, private teamService: TeamService) {
 
   }
 
@@ -68,13 +73,37 @@ export class PlayerListComponent implements OnInit {
         this.filterPlayers(this.currentPositionFilter, this.currentTeamFilter);
       }
     }else if(playerFilterType == "SORT"){
-      if(filterValue != this.currentSortType){
-        this.currentSortType = filterValue;
-        this.sortPlayers(this.currentSortType);
+      var sort: SortType;
+      if(filterValue === 'AVGAUCTIONVALUE'){
+          this.orderByType = '-auctionValueAverage'
+      }else if (filterValue === 'TRANSACTIONTRENDS'){
+          this.orderByType = '-percentChange'
+      }else {
+        this.orderByType = null;
+      }
+      // switch (filterValue){
+      //   case 'AVGAUCTIONVALUE': {
+      //     sort = SortType.AvgAuctionValue;
+      //     if(sort != this.currentSortType){
+      //       this.currentSortType = sort;
+      //       this.sortPlayers(this.currentSortType);
+      //     }
+      //   }
+      //   case 'TRANSACTIONTRENDS': {
+      //     sort = SortType.TransactionTrends;
+      //     if(sort != this.currentSortType){
+      //       this.currentSortType = sort;
+      //       this.sortPlayers(this.currentSortType);
+      //     }
+      //   }
+      //   default: {
+      //     //error
+      //     break;
+      //   }
       }
     }
-  }
-  //TODO: Fix sort so that it is correct.
+
+  //TODO: Learn pipes to use that for order by.
   //TODO: When refiltering also resort
   //TODO: Get projected and actual stats for each player somehow.
   //TODO: Check to see if api only returns some data when we can get more data. 
@@ -100,14 +129,27 @@ export class PlayerListComponent implements OnInit {
     }
   }
 
-  sortPlayers(sortType: String){
-    if(sortType == 'AvgAuctionValue'){
-      this.filteredPlayers.sort(function(a, b){ 
-          return Math.abs(b.auctionVauleAverage - a.auctionVauleAverage); 
-      })
-    }
-    if(sortType == 'TransactionTrends'){
-      this.filteredPlayers.sort(function(a, b){return Math.abs(b.percentChange) - Math.abs(a.percentChange)})
+  sortPlayers(sortType: SortType){
+    // console.log('Sorting players ' + this.currentSortType);
+    // this.quickSortService.sortType = sortType; 
+    // this.filteredPlayers = this.quickSortService.quickSort(this.filteredPlayers, 0, this.filteredPlayers.length - 1);
+    switch (sortType) {
+      case SortType.AvgAuctionValue: {
+        this.filteredPlayers = this.filteredPlayers.sort((a, b) => {
+          return b.auctionVauleAverage - a.auctionVauleAverage;
+        })
+        break;
+      }
+      case SortType.TransactionTrends: {
+        this.filteredPlayers = this.filteredPlayers.sort((a, b) => {
+          return Math.abs(b.percentChange) - Math.abs(a.percentChange);
+        })
+        break;
+      }
+      default: {
+
+        break;
+      }
     }
   }
 

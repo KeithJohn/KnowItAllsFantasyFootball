@@ -38,8 +38,8 @@
             <mat-select placeholder="Sort By" (selectionChange)="checkForSelectionChange($event.value, 'SORT')">
                     <mat-option></mat-option>
                     <!-- TODO: Create enum for sort type -->
-                    <mat-option value="AvgAuctionValue">Average Auction Value </mat-option>
-                    <mat-option value="TransactionTrends">Transaction Trends</mat-option>
+                    <mat-option value="AVGAUCTIONVALUE">Average Auction Value </mat-option>
+                    <mat-option value="TRANSACTIONTRENDS">Transaction Trends</mat-option>
 
             </mat-select>
         </mat-form-field>
@@ -48,5 +48,5 @@
     <!-- TODO: Add a div to make this scroll with cool scrollbar -->
     <!-- List -->
     <mat-action-list>
-        <button *ngFor="let player of filteredPlayers; let i = index" mat-list-item (click)="setPlayer(player)">{{ player.fullName }}: {{ getPosition(player) }}, {{ player.teamName }}</button>
+        <button *ngFor="let player of filteredPlayers | orderBy: orderByType; let i = index" mat-list-item (click)="setPlayer(player)">{{ player.fullName }}: {{ getPosition(player) }}, {{ player.teamName }}, || percentChange {{ player.percentChange | number:'.1-5'  }} || AAV {{ player.auctionValueAverage | number:'.1-5' }}</button>
     </mat-action-list>

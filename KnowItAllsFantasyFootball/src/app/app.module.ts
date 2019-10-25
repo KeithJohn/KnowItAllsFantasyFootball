@@ -16,6 +16,7 @@ import { TeamsPageComponent } from './view/teams-page/teams-page.component';
 import { PlayersPageComponent } from './view/players-page/players-page.component';
 import { DraftPageComponent } from './view/draft-page/draft-page.component';
 import { HistoryPageComponent } from './view/history-page/history-page.component';
+import { OrderByPipe } from './model/pipes/order-by.pipe';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { HistoryPageComponent } from './view/history-page/history-page.component
     PlayersPageComponent,
     DraftPageComponent,
     HistoryPageComponent,
+    OrderByPipe,
   ],
   imports: [
     BrowserModule,
