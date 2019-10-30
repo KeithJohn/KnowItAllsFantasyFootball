@@ -2,6 +2,7 @@
 .style-5::-webkit-scrollbar-track
 {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     background-color: #F5F5F5;
 }
 
@@ -21,12 +22,13 @@
 }
 </style>
 
+<h1 *ngIf="currentPlayer">{{ currentPlayer.fullName }}</h1>
 <mat-grid-list cols=2 rowHeight=2:1>
 
-    <!-- TODO: Add scroll for list -->
+    <!-- TODO: -->
     <mat-grid-tile [rowspan]="2">
         <div style="width: 95%; height: 95%; margin: 1rem;">
-            <app-player-list></app-player-list>
+            <app-player-list (currentPlayer)="setCurrentPlayer($event)"></app-player-list>
         </div>
     </mat-grid-tile>
 

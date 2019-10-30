@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, DefaultIterableDiffer } from '@angular/core';
+import { Component, OnInit, ViewChild, DefaultIterableDiffer, Input, Output, EventEmitter } from '@angular/core';
 import {FreeAgentService} from "../../../model/services/free-agent.service";
 import {TeamService} from "../../../model/services/team.service";
 import {FreeAgent} from "../../../model/models/free-agent-player.model";
@@ -12,6 +12,7 @@ import {Player} from "../../../model/models/player.model";
   providers: []
 })
 export class PlayerListComponent implements OnInit {
+  @Output() currentPlayer = new EventEmitter<Player>();
   freeAgents: FreeAgent[] =[];
   teams: Team[] = [];
   players: Player[] = [];
@@ -82,7 +83,7 @@ export class PlayerListComponent implements OnInit {
 
   //TODO:
   setPlayer(player:Player){
-    console.log(player);
+    this.currentPlayer.emit(player);
     
   }
 }

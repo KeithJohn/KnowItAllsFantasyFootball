@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Player } from 'src/app/model/models/player.model';
 
 @Component({
   selector: 'app-players-page',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayersPageComponent implements OnInit {
 
+  currentPlayer: Player;
   constructor() { }
 
   ngOnInit() {
   }
 
+  setCurrentPlayer(player:Player){
+    console.log(player);
+    this.currentPlayer = player;
+  }
 }
