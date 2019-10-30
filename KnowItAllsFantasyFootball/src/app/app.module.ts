@@ -17,6 +17,10 @@ import { PlayersPageComponent } from './view/players-page/players-page.component
 import { DraftPageComponent } from './view/draft-page/draft-page.component';
 import { HistoryPageComponent } from './view/history-page/history-page.component';
 import { OrderByPipe } from './model/pipes/order-by.pipe';
+import { FormsModule } from '@angular/forms';
+import { FilterByPositionPipe } from './model/pipes/filter-by-position.pipe';
+import { FilterByTeamPipe } from './model/pipes/filter-by-team.pipe';
+import { FilterByNamePipe } from './model/pipes/filter-by-name.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,9 @@ import { OrderByPipe } from './model/pipes/order-by.pipe';
     DraftPageComponent,
     HistoryPageComponent,
     OrderByPipe,
+    FilterByPositionPipe,
+    FilterByTeamPipe,
+    FilterByNamePipe,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +50,8 @@ import { OrderByPipe } from './model/pipes/order-by.pipe';
     MatDividerModule,
     MatListModule,
     ScrollDispatchModule,
-    MatGridListModule
+    MatGridListModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

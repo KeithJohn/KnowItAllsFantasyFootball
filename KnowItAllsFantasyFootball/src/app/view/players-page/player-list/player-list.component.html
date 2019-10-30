@@ -1,26 +1,59 @@
 <style>
   .toolbar {
-    /* height: 50px; */
-    /* margin: 8px; */
     display: flex;
     align-items: center;
     background-color: #1976d2;
     color: white;
     font-weight: 600;
+    opacity: 1;
   }
+
+  .sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    opacity: 1;
+   }
+.style-5{
+    overflow-y: scroll;
+}
+   .style-5::-webkit-scrollbar-track
+{
+    /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
+    background-color: #F5F5F5;
+}
+
+.style-5::-webkit-scrollbar
+{
+    width: 10px;
+    background-color: #F5F5F5;
+}
+
+.style-5::-webkit-scrollbar-thumb
+{
+    background-color: #0ae;
+    
+    background-image: -webkit-gradient(linear, 0 0, 0 100%,
+                       color-stop(.5, rgba(255, 255, 255, .2)),
+                       color-stop(.5, transparent), to(transparent));
+}
 </style>
 
-<!-- TODO: Make filter bar sticky, and non transparent -->
+<!-- TODO: Styling and design 
+        Make filter bar non transparent
+        add background to list item
+        add border around?
+        format info for each list item
+        make inputs smaller such as position
+        make position input not bold?? -->
+
 <!-- Filter bar -->
-<!-- https://codeburst.io/create-a-search-pipe-to-dynamically-filter-results-with-angular-4-21fd3a5bec5c -->
     <div class="toolbar" role="banner">
-        <!-- <span style="padding:5px">Players</span> -->
         <div class="spacer"></div>
-        <mat-form-field style="padding:5px;">
-            <mat-select class="myClass" placeholder="Position" (selectionChange)="checkForSelectionChange($event.value, 'POSITION')">
-                    <mat-option ></mat-option>
-                    <!-- <mat-option *ngFor="let pos of Position | keyvalue" value="{{ pos.value }}">{{ pos.key }}</mat-option> -->
-                    <mat-option  value="QB">QB</mat-option>
+        <mat-form-field color=white class="toolbar" style="padding:5px;">
+            <mat-select color=white class="myClass" placeholder="Position" [(ngModel)]="currentPositionFilter">
+                    <mat-option >All</mat-option>
+                    <mat-option value="QB">QB</mat-option>
                     <mat-option value="RB">RB</mat-option>
                     <mat-option value="WR">WR</mat-option>
                     <mat-option value="TE">TE</mat-option>
@@ -29,25 +62,27 @@
             </mat-select>
         </mat-form-field>
         <mat-form-field>
-            <mat-select placeholder="Team" (selectionChange)="checkForSelectionChange($event.value, 'TEAM')">
-                    <mat-option></mat-option>
+            <mat-select placeholder="Team" [(ngModel)]="currentTeamFilter">
+                    <mat-option>All</mat-option>
                     <mat-option *ngFor="let team of teams" [value]="team.id">{{team.name}}</mat-option>
-                    <mat-option [value]="0">Free Agent</mat-option>
+                    <mat-option value="0">Free Agent</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field>
-            <mat-select placeholder="Sort By" (selectionChange)="checkForSelectionChange($event.value, 'SORT')">
+            <mat-select placeholder="Sort By" [(ngModel)]=orderByType>
                     <mat-option></mat-option>
-                    <!-- TODO: Create enum for sort type -->
-                    <mat-option value="AVGAUCTIONVALUE">Average Auction Value </mat-option>
-                    <mat-option value="TRANSACTIONTRENDS">Transaction Trends</mat-option>
-
+                    <mat-option value="-auctionValueAverage">Average Auction Value </mat-option>
+                    <mat-option value="-percentChange">Transaction Trends</mat-option>
             </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Name" [(ngModel)]="searchText">
         </mat-form-field>
     </div>
 
-    <!-- TODO: Add a div to make this scroll with cool scrollbar -->
     <!-- List -->
-    <mat-action-list>
-        <button *ngFor="let player of filteredPlayers | orderBy: orderByType; let i = index" mat-list-item (click)="setPlayer(player)">{{ player.fullName }}: {{ getPosition(player) }}, {{ player.teamName }}, || percentChange {{ player.percentChange | number:'.1-5'  }} || AAV {{ player.auctionValueAverage | number:'.1-5' }}</button>
-    </mat-action-list>
+    <!-- TODO: Add Scrolling -->
+        <mat-action-list>
+            <button class="playerListItem" *ngFor="let player of players | filterByPosition: currentPositionFilter | filterByTeam: currentTeamFilter  | filterByName : searchText | orderBy: orderByType; let i = index" mat-list-item (click)="setPlayer(player)">{{ player.fullName }}: {{ getPosition(player) }}, {{ player.teamName }}, || percentChange {{ player.percentChange | number:'.1-5'  }} || AAV {{ player.auctionValueAverage | number:'.1-5' }}</button>
+        </mat-action-list>
+
