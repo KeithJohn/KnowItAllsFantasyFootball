@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { FilterByPositionPipe } from './model/pipes/filter-by-position.pipe';
 import { FilterByTeamPipe } from './model/pipes/filter-by-team.pipe';
 import { FilterByNamePipe } from './model/pipes/filter-by-name.pipe';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { FilterByNamePipe } from './model/pipes/filter-by-name.pipe';
     MatListModule,
     ScrollDispatchModule,
     MatGridListModule,
-    FormsModule
+    FormsModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

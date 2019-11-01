@@ -1,8 +1,87 @@
 <!-- TODO: Create rows and columns to make similar to espn app matchup  -->
 <!-- TODO: Add slider thing for multiple matchups -->
 <!-- TODO: Beautify things -->
-<p>matchup works!</p>
+
+<!--TODO: Create a top bar for switching between matchups and selecting weeks-->
+<!--TODO: Create two columns One for each team-->
+
+  <!--
+    TODO: Team photo
+    <img src="{{ teams[boxscore.homeTeamId].logoURL }}">
+  -->
+
+  <!--
+    TODO: Team Name
+
+  -->
+  <!--TODO: List of players, qb, rb, wr, te, D, k, bench-->
+
+<!--&lt;!&ndash;Carousel Wrapper&ndash;&gt;-->
+<!--<div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">-->
+<!--  &lt;!&ndash;Indicators&ndash;&gt;-->
+<!--  <ol class="carousel-indicators">-->
+<!--    <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>-->
+<!--    <li data-target="#carousel-example-2" data-slide-to="1"></li>-->
+<!--    <li data-target="#carousel-example-2" data-slide-to="2"></li>-->
+<!--  </ol>-->
+<!--  &lt;!&ndash;/.Indicators&ndash;&gt;-->
+<!--  &lt;!&ndash;Slides&ndash;&gt;-->
+<!--  <div class="carousel-inner" role="listbox">-->
+<!--    <div *ngFor="let boxscore of boxscores" class="carousel-item">-->
+<!--      <div class="view">-->
+<!--        <img class="d-block w-100" src="{{ teams[boxscore.homeTeamId].logoURL }}">-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  &lt;!&ndash;/.Slides&ndash;&gt;-->
+<!--  &lt;!&ndash;Controls&ndash;&gt;-->
+<!--  <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">-->
+<!--    <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+<!--    <span class="sr-only">Previous</span>-->
+<!--  </a>-->
+<!--  <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">-->
+<!--    <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+<!--    <span class="sr-only">Next</span>-->
+<!--  </a>-->
+<!--  &lt;!&ndash;/.Controls&ndash;&gt;-->
+<!--</div>-->
+<!--&lt;!&ndash;/.Carousel Wrapper&ndash;&gt;-->
+
+
+<!-- https://netbasal.com/building-a-simple-carousel-component-with-angular-3a94092b7080
+      https://stackoverflow.com/questions/42478188/angular-2-bootstrap-variable-length-carousel-using-ngfor
+      https://stackoverflow.com/questions/47882684/how-to-do-angular-ngfor-on-bootstrap-4-carousel?rq=1
+ -->
+
+
+<div>
+<!--
+  Left Column
+    photo
+    name
+    points
+    proj points
+
+
+    players
+-->
+
+<!--
+  Right Column
+    photo
+    name
+    points
+    proj points
+
+
+    players
+-->
+</div>
 <div *ngFor="let boxscore of boxscores">
-    <p></p>
-    <p>{{ boxscore.awayScore }}</p>
+<!--  <img src="{{ teams[boxscore.homeTeamId].logoURL }}">-->
+<!--  <p>{{teams[boxscore.homeTeamId].name}}</p>-->
+<!--  <p>{{ boxscore.awayScore }}</p>-->
+
+  <div *ngFor="let player of boxscore.homeRoster">
+    <p>{{player.player}}</p>
+  </div>
 </div>

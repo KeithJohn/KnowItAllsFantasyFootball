@@ -28,23 +28,22 @@ export class MatchupComponent implements OnInit {
     })
   }
 
-  //TODO: Add team name for away and home for boxscore. 
+  //TODO: Add team name for away and home for boxscore.
   getMatchups(seasonId: number, matchupPeriodId: number, scoringPeriodId: number){
     this.boxScoreService.getBoxscores(seasonId, matchupPeriodId, scoringPeriodId).subscribe(data => {
       console.log(data);
       this.boxscores = data;
       this.boxscores.forEach(boxscore => {
-        
+
         let awayTeam = this.teams[this.teams.findIndex(team => {
           return team.id == boxscore.awayTeamId
         })];
         let homeTeam = this.teams[this.teams.findIndex(team => {
           return team.id == boxscore.homeTeamId
         })];
-        
-        console.log(awayTeam.name + " " + boxscore.awayScore);
-        console.log(homeTeam.name + " " + boxscore.homeScore);
-        
+
+        console.log(boxscore);
+
       })
     });
   }
