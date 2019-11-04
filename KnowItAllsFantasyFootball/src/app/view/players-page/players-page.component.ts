@@ -8,6 +8,10 @@ import { Player } from 'src/app/model/models/player.model';
 })
 export class PlayersPageComponent implements OnInit {
 
+  /**
+   * TODO:  Move getting of teams and players to players page. 
+   *        Get projected points for current player on change? Or get projected points for all when initiated.(may take a long time);
+   */
   currentPlayer: Player;
   constructor() { }
 

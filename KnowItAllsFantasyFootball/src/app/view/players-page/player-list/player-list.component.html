@@ -82,6 +82,7 @@
 
     <!-- List -->
     <!-- TODO: Add Scrolling -->
+    <!-- TODO: https://stackoverflow.com/questions/8660149/need-to-make-a-clickable-div-button -->
         <mat-action-list>
             <button class="playerListItem" *ngFor="let player of players | filterByPosition: currentPositionFilter | filterByTeam: currentTeamFilter  | filterByName : searchText | orderBy: orderByType; let i = index" mat-list-item (click)="setPlayer(player)">{{ player.fullName }}: {{ getPosition(player) }}, {{ player.teamName }}, || percentChange {{ player.percentChange | number:'.1-5'  }} || AAV {{ player.auctionValueAverage | number:'.1-5' }}</button>
         </mat-action-list>

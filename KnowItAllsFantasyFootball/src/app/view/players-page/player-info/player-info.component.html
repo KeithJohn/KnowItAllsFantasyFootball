@@ -1,0 +1,18 @@
+<!-- TODO: ngIf if no current player -->
+<!-- TODO: Round decimal places -->
+<!-- TODO: Show only if applicable such as injury status for defense -->
+
+<!-- ROW -->
+    <h1>{{ currentPlayer.fullName }}</h1>
+    <h2>{{ getPosition(currentPlayer) }}</h2>
+    <h4>{{ currentPlayer.proTeamAbbreviation }}</h4>
+<!-- ROW -->
+    <h2>{{ currentPlayer.teamName }}</h2>
+<!-- ROW -->
+    <h5>Percent Owned: {{ currentPlayer.percentOwned }}</h5>
+    <h5>Transaction Trend: {{ currentPlayer.percentChange }}</h5>
+    <h5>Average Auction Value: {{ currentPlayer.auctionValueAverage }}</h5>
+    <h5>Percent Started: {{ currentPlayer.percentStarted }}</h5>
+    <h5>Average Draft Position: {{ currentPlayer.averageDraftPosition }}</h5>
+    <h5>Injury Status: {{ currentPlayer.injuryStatus }}</h5>
+

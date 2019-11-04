@@ -21,6 +21,8 @@ import { FormsModule } from '@angular/forms';
 import { FilterByPositionPipe } from './model/pipes/filter-by-position.pipe';
 import { FilterByTeamPipe } from './model/pipes/filter-by-team.pipe';
 import { FilterByNamePipe } from './model/pipes/filter-by-name.pipe';
+import { PlayerGraphComponent } from './view/players-page/player-graph/player-graph.component';
+import { PlayerInfoComponent } from './view/players-page/player-info/player-info.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { FilterByNamePipe } from './model/pipes/filter-by-name.pipe';
     FilterByPositionPipe,
     FilterByTeamPipe,
     FilterByNamePipe,
+    PlayerGraphComponent,
+    PlayerInfoComponent,
   ],
   imports: [
     BrowserModule,

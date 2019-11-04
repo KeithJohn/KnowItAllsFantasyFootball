@@ -22,7 +22,6 @@
 }
 </style>
 
-<h1 *ngIf="currentPlayer">{{ currentPlayer.fullName }}</h1>
 <mat-grid-list cols=2 rowHeight=2:1>
 
     <!-- TODO: -->
@@ -34,12 +33,16 @@
 
   <!-- TODO -->
     <mat-grid-tile>
-        <div style="width: 95%; height: 95%;">Player Graph</div>
+        <div style="width: 95%; height: 95%;">
+                <app-player-graph></app-player-graph>
+        </div>
     </mat-grid-tile>
 
   <!-- TODO -->
     <mat-grid-tile>
-            <div style="width: 95%; height: 95%;">Player Info</div>
+            <div style="width: 95%; height: 95%;">
+                <app-player-info [(currentPlayer)]="currentPlayer"></app-player-info>
+            </div>
     </mat-grid-tile>
 
 </mat-grid-list>
