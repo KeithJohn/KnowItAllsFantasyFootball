@@ -22,6 +22,7 @@ import { FilterByPositionPipe } from './model/pipes/filter-by-position.pipe';
 import { FilterByTeamPipe } from './model/pipes/filter-by-team.pipe';
 import { FilterByNamePipe } from './model/pipes/filter-by-name.pipe';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MatchupPlayerComponent } from './view/teams-page/matchup/matchup-player/matchup-player.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     FilterByPositionPipe,
     FilterByTeamPipe,
     FilterByNamePipe,
+    MatchupPlayerComponent,
   ],
   imports: [
     BrowserModule,
