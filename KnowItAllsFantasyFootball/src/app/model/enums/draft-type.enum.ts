@@ -1,3 +1,7 @@
+/**
+ * TODO: Check if this is needed
+ */
+
 export enum DraftType {
     Offline = "OFFLINE",
     Snake = "SNAKE",

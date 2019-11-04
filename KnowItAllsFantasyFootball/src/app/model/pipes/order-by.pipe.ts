@@ -1,3 +1,7 @@
+/**
+ * TODO: Clean up
+ */
+
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({

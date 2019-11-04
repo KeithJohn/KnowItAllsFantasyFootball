@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LuckyWinComponent } from './lucky-win.component';
+import { TeamGraphComponent } from './team-graph.component';
 
-describe('LuckyWinComponent', () => {
-  let component: LuckyWinComponent;
-  let fixture: ComponentFixture<LuckyWinComponent>;
+describe('TeamGraphComponent', () => {
+  let component: TeamGraphComponent;
+  let fixture: ComponentFixture<TeamGraphComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LuckyWinComponent ]
+      declarations: [ TeamGraphComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LuckyWinComponent);
+    fixture = TestBed.createComponent(TeamGraphComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

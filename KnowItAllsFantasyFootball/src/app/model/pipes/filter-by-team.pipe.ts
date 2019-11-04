@@ -1,5 +1,7 @@
+/**
+ * TODO: Check if this is needed and clean up
+ */
 import { Pipe, PipeTransform } from '@angular/core';
-import { Player } from '../models/player.model';
 
 @Pipe({
   name: 'filterByTeam'

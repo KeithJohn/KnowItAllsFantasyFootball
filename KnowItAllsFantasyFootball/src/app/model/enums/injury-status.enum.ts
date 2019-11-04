@@ -1,4 +1,8 @@
 /**
+ * TODO: Check if this is needed
+ */
+
+/**
  * Injury status of the player.
  * Options:
  *  'ACTIVE'

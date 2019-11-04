@@ -1,3 +1,7 @@
+/**
+ * TODO: Clean up and add methods for getting additional necessary data
+ */
+
 import { Injectable } from '@angular/core';
 import { Client } from 'espn-fantasy-football-api/web';
 import { Observable, from } from 'rxjs';
@@ -11,7 +15,7 @@ export class NflGameService {
     this.client = new Client({leagueId: 58438855});
   }
 
-  getNFLGamesForPeriod(startDate: String, endDate: String){
+  getNFLGamesForPeriod(startDate: String, endDate: String): Observable<any>{
     return from(this.client.getNFLGamesForPeriod({startDate: startDate, endDate: endDate}))
   }
 }

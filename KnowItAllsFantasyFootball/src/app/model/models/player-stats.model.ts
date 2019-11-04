@@ -1,3 +1,7 @@
+/** TODO:
+ *      Check if this is needed and clean up
+ *      Add additional necessary variables 
+ */
 export interface PlayerStats {
     /**
      *  Number of passing yards for the player.

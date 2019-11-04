@@ -1,3 +1,8 @@
+/** TODO:
+ *      Check if this is needed and clean up
+ *      Add additional necessary variables 
+ */
+
 import { BoxscorePlayer } from './boxscore-player.model';
 
 export interface Boxscore {

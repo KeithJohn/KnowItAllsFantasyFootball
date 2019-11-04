@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {Player} from "../../../../model/models/player.model";
 
 @Component({
@@ -7,10 +7,11 @@ import {Player} from "../../../../model/models/player.model";
   styleUrls: ['./matchup-player.component.sass']
 })
 export class MatchupPlayerComponent implements OnInit {
-  player:Player;
+  @Input() player:Player;
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

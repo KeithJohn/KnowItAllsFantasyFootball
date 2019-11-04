@@ -1,3 +1,6 @@
+/**
+ * TODO: Clean up and add methods for getting additional necessary data
+ */
 import { Injectable } from '@angular/core';
 import { Client } from 'espn-fantasy-football-api/web';
 import { Observable, from } from 'rxjs';

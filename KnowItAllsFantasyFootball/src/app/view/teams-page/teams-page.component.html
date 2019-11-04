@@ -1,21 +1,23 @@
-<!-- TODO: Create grid with matchup lucky win and team info -->
+<!-- TODO: Beautify -->
 <mat-grid-list cols=2 rowHeight=2:1>
 
-        <!-- TODO: Add scroll for list -->
-        <mat-grid-tile [rowspan]="2" [style.background]='lightblue'>
-            <div style="background-color: lightblue; width: 95%; height: 95%; padding: 2rem; overflow: scroll;" id="style-5">
-                <app-matchup></app-matchup>
-            </div>
-        </mat-grid-tile>
-    
-      <!-- TODO -->
-        <mat-grid-tile>
-            <div style="background-color: lightcoral; width: 95%; height: 95%;">Team Graphs</div>
-        </mat-grid-tile>
-    
-      <!-- TODO -->
-        <mat-grid-tile>
-                <div style="background-color: lightgreen; width: 95%; height: 95%;">Team Info</div>
-        </mat-grid-tile>
-    
-    </mat-grid-list>
+  <!-- TODO: Add slider for list -->
+  <mat-grid-tile [rowspan]="2" [style.background]='lightblue'>
+    <div style="background-color: lightblue; width: 95%; height: 95%;">
+      <app-matchup></app-matchup>
+    </div>
+  </mat-grid-tile>
+
+  <!-- TODO -->
+  <mat-grid-tile>
+    <div style="background-color: lightcoral; width: 95%; height: 95%;">Team Graphs</div>
+  </mat-grid-tile>
+
+  <!-- TODO -->
+  <mat-grid-tile>
+    <div style="background-color: lightgreen; width: 95%; height: 95%;">
+      <app-team-info></app-team-info>
+    </div>
+  </mat-grid-tile>
+
+</mat-grid-list>

@@ -5,17 +5,14 @@ import {MatGridListModule, MatListModule, MatDividerModule ,MatFormFieldModule, 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './view/app.component';
-import { TestComponent } from './view/test/test.component';
 import { PlayerListComponent } from './view/players-page/player-list/player-list.component';
 import { PlayerListItemComponent } from './view/players-page/player-list/player-list-item/player-list-item.component';
 
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { MatchupComponent } from './view/teams-page/matchup/matchup.component';
-import { LuckyWinComponent } from './view/teams-page/lucky-win/lucky-win.component';
 import { TeamsPageComponent } from './view/teams-page/teams-page.component';
 import { PlayersPageComponent } from './view/players-page/players-page.component';
 import { DraftPageComponent } from './view/draft-page/draft-page.component';
-import { HistoryPageComponent } from './view/history-page/history-page.component';
 import { OrderByPipe } from './model/pipes/order-by.pipe';
 import { FormsModule } from '@angular/forms';
 import { FilterByPositionPipe } from './model/pipes/filter-by-position.pipe';
@@ -23,21 +20,19 @@ import { FilterByTeamPipe } from './model/pipes/filter-by-team.pipe';
 import { FilterByNamePipe } from './model/pipes/filter-by-name.pipe';
 import { PlayerGraphComponent } from './view/players-page/player-graph/player-graph.component';
 import { PlayerInfoComponent } from './view/players-page/player-info/player-info.component';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MatchupPlayerComponent } from './view/teams-page/matchup/matchup-player/matchup-player.component';
+import { TeamInfoComponent } from './view/teams-page/team-info/team-info.component';
+import { TeamGraphComponent } from './view/teams-page/team-graph/team-graph.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent,
     PlayerListComponent,
     PlayerListItemComponent,
     MatchupComponent,
-    LuckyWinComponent,
     TeamsPageComponent,
     PlayersPageComponent,
     DraftPageComponent,
-    HistoryPageComponent,
     OrderByPipe,
     FilterByPositionPipe,
     FilterByTeamPipe,
@@ -45,6 +40,8 @@ import { MatchupPlayerComponent } from './view/teams-page/matchup/matchup-player
     PlayerGraphComponent,
     PlayerInfoComponent,
     MatchupPlayerComponent,
+    TeamInfoComponent,
+    TeamGraphComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +56,6 @@ import { MatchupPlayerComponent } from './view/teams-page/matchup/matchup-player
     ScrollDispatchModule,
     MatGridListModule,
     FormsModule,
-    MDBBootstrapModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

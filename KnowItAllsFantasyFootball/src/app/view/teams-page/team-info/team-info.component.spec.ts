@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HistoryPageComponent } from './history-page.component';
+import { TeamInfoComponent } from './team-info.component';
 
-describe('HistoryPageComponent', () => {
-  let component: HistoryPageComponent;
-  let fixture: ComponentFixture<HistoryPageComponent>;
+describe('TeamInfoComponent', () => {
+  let component: TeamInfoComponent;
+  let fixture: ComponentFixture<TeamInfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HistoryPageComponent ]
+      declarations: [ TeamInfoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HistoryPageComponent);
+    fixture = TestBed.createComponent(TeamInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

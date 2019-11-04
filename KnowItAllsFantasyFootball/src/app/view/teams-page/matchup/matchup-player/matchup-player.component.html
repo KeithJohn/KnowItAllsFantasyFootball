@@ -1,20 +1,19 @@
 <!-- TODO: Player name, pro team abrev -->
 <!-- TODO: yards, tds, stats -->
 <!-- TODO: points scored -->
+<!-- TODO: See mathchup component for rest of todos. -->
 
-<mat-grid-list cols="2">
-  <mat-grid-tile>
-    <p class="">{{player.firstName.charAt(0)}} {{player.lastName}}</p>
-    <p class="">{{player.proTeamAbbreviation}}</p>
-  </mat-grid-tile>
+<div class="grid-container" style="height: 100%;">
 
-  <mat-grid-tile rowspan="2">
-    <!-- TODO: get player score from matchup   -->
-  </mat-grid-tile>
+  <div style="width:100%; background-color:white">
+      <div style=" float:left; width: 80%; height:100%; padding:5px">
+          <p style="display: inline; font-weight: bold;">{{player.firstName.charAt(0)}} {{player.lastName}}, </p> 
+          <p style="display: inline;">{{player.proTeamAbbreviation}}</p>
+          <p>stat: 1</p>
+      </div>
+      <div style=" float:right; text-align: center; width: 20%; height: 100%;">
+          <p style="font-size: 1.5rem; color: blue; font-weight:500;">12.2</p>
+      </div>
+  </div>
 
-  <mat-grid-tile>
-  <!-- TODO: ngIf for each stat   -->
-    <p></p>
-    <p></p>
-  </mat-grid-tile>
-</mat-grid-list>
+</div>

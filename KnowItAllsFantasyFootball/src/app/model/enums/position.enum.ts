@@ -1,3 +1,6 @@
+/**
+ * TODO: Check if this is needed
+ */
 export enum Position {
   QB = "QB",
   RB = "RB",

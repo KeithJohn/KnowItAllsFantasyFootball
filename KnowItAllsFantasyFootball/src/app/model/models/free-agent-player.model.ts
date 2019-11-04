@@ -1,3 +1,8 @@
+/** TODO:
+ *      Check if this is needed and clean up
+ *      Add additional necessary variables 
+ */
+
 import { Player } from './player.model';
 import { PlayerStats } from './player-stats.model';
 

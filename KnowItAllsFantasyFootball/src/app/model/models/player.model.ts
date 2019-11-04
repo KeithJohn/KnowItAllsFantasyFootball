@@ -1,3 +1,8 @@
+/** TODO:
+ *      Check if this is needed and clean up
+ *      Add additional necessary variables 
+ */
+
 import { AvailabilityStatus } from '../enums/availability-status.enum';
 import { InjuryStatus } from '../enums/injury-status.enum';
 

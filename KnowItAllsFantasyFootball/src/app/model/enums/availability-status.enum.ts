@@ -1,4 +1,8 @@
 /**
+ * TODO: Check to see if this enum is necessary
+ */
+
+/**
  * Availability status of the player.
  * Options:
  *  'ONTEAM': Currently on a fantasy team
