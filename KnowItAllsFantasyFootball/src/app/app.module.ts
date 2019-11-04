@@ -23,6 +23,8 @@ import { FilterByTeamPipe } from './model/pipes/filter-by-team.pipe';
 import { FilterByNamePipe } from './model/pipes/filter-by-name.pipe';
 import { PlayerGraphComponent } from './view/players-page/player-graph/player-graph.component';
 import { PlayerInfoComponent } from './view/players-page/player-info/player-info.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MatchupPlayerComponent } from './view/teams-page/matchup/matchup-player/matchup-player.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { PlayerInfoComponent } from './view/players-page/player-info/player-info
     FilterByNamePipe,
     PlayerGraphComponent,
     PlayerInfoComponent,
+    MatchupPlayerComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,8 @@ import { PlayerInfoComponent } from './view/players-page/player-info/player-info
     MatListModule,
     ScrollDispatchModule,
     MatGridListModule,
-    FormsModule
+    FormsModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

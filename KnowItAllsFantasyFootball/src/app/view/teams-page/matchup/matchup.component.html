@@ -1,8 +1,71 @@
-<!-- TODO: Create rows and columns to make similar to espn app matchup  -->
-<!-- TODO: Add slider thing for multiple matchups -->
 <!-- TODO: Beautify things -->
-<p>matchup works!</p>
-<div *ngFor="let boxscore of boxscores">
-    <p></p>
-    <p>{{ boxscore.awayScore }}</p>
+
+
+<div>
+<!-- Sticky headeer with slidable thing like espn matchup -->
+  <mat-grid-list cols="2">
+
+    <mat-grid-tile>
+      Home Team Photo, Home Team Name, Home Points Scored
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      Away Team Photo, Away Team Name, Away Points Scored
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+  <mat-grid-list cols="3">
+
+    <mat-grid-tile>
+      Home Team Projected
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      Matchup indicator
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      Away Team Projected
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
 </div>
+
+<div>
+<!-- Scrolling div of all the positions -->
+<!--ngFor player component  -->
+</div>
+<!-- TODO: All of this
+  Sticky header
+    Row 1:
+      column 1: Home Team photo, home team name, home points scored
+      column 2: Away Team photo, away team name, away points scored
+
+    Row 2:
+      column 1: Home team projected points
+      column 2: indicator for matchups
+      column 3: Away team projected points
+-->
+
+
+<!--
+  Scrolling div
+    Row N: for each roster spot (example 1 qb, 2 rb, 2 wr, 1 flex, 6 bench
+      column 1: Home Player info component/div
+      column 2: Position
+      column 3: Away Player info component/div
+-->
+
+
+
+<!--<div *ngFor="let boxscore of boxscores">-->
+<!--&lt;!&ndash;  <img src="{{ teams[boxscore.homeTeamId].logoURL }}">&ndash;&gt;-->
+<!--&lt;!&ndash;  <p>{{teams[boxscore.homeTeamId].name}}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;  <p>{{ boxscore.awayScore }}</p>&ndash;&gt;-->
+
+<!--  <div *ngFor="let player of boxscore.homeRoster">-->
+<!--    <p>{{player.player}}</p>-->
+<!--  </div>-->
+<!--</div>-->
