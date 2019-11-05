@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import {MatGridListModule, MatListModule, MatDividerModule ,MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule} from '@angular/material/';
+import {MatGridListModule, MatListModule, MatDividerModule ,MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatCardModule} from '@angular/material/';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './view/app.component';
@@ -23,6 +23,7 @@ import { PlayerInfoComponent } from './view/players-page/player-info/player-info
 import { MatchupPlayerComponent } from './view/teams-page/matchup/matchup-player/matchup-player.component';
 import { TeamInfoComponent } from './view/teams-page/team-info/team-info.component';
 import { TeamGraphComponent } from './view/teams-page/team-graph/team-graph.component';
+import { DashboardComponent } from './view/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { TeamGraphComponent } from './view/teams-page/team-graph/team-graph.comp
     MatchupPlayerComponent,
     TeamInfoComponent,
     TeamGraphComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +58,7 @@ import { TeamGraphComponent } from './view/teams-page/team-graph/team-graph.comp
     ScrollDispatchModule,
     MatGridListModule,
     FormsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

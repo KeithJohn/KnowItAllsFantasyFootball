@@ -1,0 +1,72 @@
+<div>
+  <mat-grid-list cols=2 rowHeight=2:.90>
+
+    <!-- TODO: 
+            Add ability to click to go to teams page 
+            Add description of features
+            Add cool graphic for teams
+    -->
+    <mat-grid-tile>
+      <div style="width:80%; height: 80%; margin:auto;">
+        <a routerLink="/teams">
+          <mat-card style="width:100%; height:100%;">
+            <mat-card-title>Teams</mat-card-title>
+            <mat-card-content>
+              <p style="font-size: 1.15rem;">
+                Look at your future and past matchups. Dive deep into wins, losses and projections for your team.
+                Visualize data through unique graphs.
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </a>
+      </div>
+    </mat-grid-tile>
+
+    <!-- TODO: 
+            Add info for starting draft and start draft button/ or 
+            Add info on draft features
+            Create into card
+    -->
+    <mat-grid-tile [rowspan]="2">
+      <div style="width:80%; height: 91%; margin:auto;">
+        <a routerLink="/draft">
+            <mat-card style="width: 100%; height:100%;">
+                <mat-card-title>Draft</mat-card-title>
+                <mat-card-content>
+                    <p style="font-size: 1.15rem;">
+                        Use the online draft tool to help track available player, track pick timers, interesting draft recaps, and much more.
+                        Unique player info
+                        custom draft orders
+                         ...
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </a>
+      </div>
+    </mat-grid-tile>
+
+    <!-- TODO: 
+            Add ability to click to go to players page as well
+            Add description of features
+            Create into card
+    -->
+    <mat-grid-tile>
+      <div style="width:80%; height: 80%; margin:auto;">
+        <a routerLink="/players">
+            <mat-card style="width: 100%; height:100%;">
+                <mat-card-title>Players</mat-card-title>
+                <mat-card-content>
+                    <p style="font-size: 1.15rem;">
+                        Find available players in your league,
+                        View other teams rosters,
+                        See in depth data for each player,
+                        View this data in unique graphs.
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </a>
+      </div>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</div>
