@@ -1,6 +1,12 @@
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="//unpkg.com/slick-carousel@1.8.1/slick/slick.js"></script>
+
 <!-- TODO: Beautify things -->
 
-<!-- TODO: 
+<!-- TODO:
         Add slider functionality for selecting matchup
             - add indicator
             - add buttons and sliding for moving between matchups
@@ -9,56 +15,60 @@
             - get projected points for each player for the week.
             - get projected point for each team for the week by adding each boxscore player projected.
         Add Actual points for player
-            - get from boxscore player raw stats. 
+            - get from boxscore player raw stats.
         Add actual stats for player
             - get from boxscore player raw stats.
         Fix scroll bar
             - either hide or make look better.
         Beautify fonts
 -->
+<ngb-carousel *ngIf="isLoadedMatchups && isLoadedTeams" [showNavigationArrows]="true" [showNavigationIndicators]="true">
+  <ng-template ngbSlide *ngFor="let boxscore of boxscores">
+    <div style="background-color: coral; height: 22%; width:80%">
+      <!-- Row 1 -->
+      <a><img src="../../../../assets/iconfinder_icon-ios7-arrow-back_211686.svg" style="margin:auto; height:22%; float:left"></a>
+      <div style="height:10rem; overflow:hidden;">
+        <div style="width: 50%; text-align: center; height:100%; padding-top: 10px; float:left">
+          <!-- Home team photo -->
+          <img style="display:block; margin:auto; height:4.5rem"
+               src="{{boxscore.homeTeamId - 1].logoURL}}">
+          <!-- home team name -->
+          <h3>{{ teams[boxscore.homeTeamId - 1].name }} </h3>
+          <!-- home points scored -->
+          <h4>{{ boxscore.homeScore }}</h4>
+        </div>
 
-<div style="height:100%">
-  <div *ngIf="isLoadedMatchups && isLoadedTeams" style="background-color: coral; height: 22%;">
-    <!-- Row 1 -->
-    <div style="height:10rem; overflow:hidden;">
-      <div style="width: 50%; text-align: center; height:100%; padding-top: 10px; float:left">
-        <!-- Home team photo -->
-        <img style="display:block; margin:auto; height:4.5rem"
-          src="{{teams[boxscores[boxScoreNumber].homeTeamId - 1].logoURL}}">
-        <!-- home team name -->
-        <h3>{{ teams[boxscores[boxScoreNumber].homeTeamId - 1].name }} </h3>
-        <!-- home points scored -->
-        <h4>{{ boxscores[boxScoreNumber].homeScore }}</h4>
+        <div style="width: 50%; text-align: center; height:100%; padding-top: 10px; float:right">
+          <!-- Away team photo -->
+          <img style="display:block; margin:auto; height:4.5rem;"
+               src="{{teams[boxscore.awayTeamId - 1].logoURL}}">
+          <!-- Away team name -->
+          <h3>{{ teams[boxscore.awayTeamId - 1].name }} </h3>
+          <!-- Away points scored -->
+          <h4>{{ boxscore.awayScore }}</h4>
+        </div>
+        <a><img src="../../../../assets/iconfinder_icon-ios7-arrow-forward_211688.svg" style="margin:auto; height:22%; float:right"></a>
       </div>
 
-      <div style="width: 50%; text-align: center; height:100%; padding-top: 10px; float:right">
-        <!-- Away team photo -->
-        <img style="display:block; margin:auto; height:4.5rem;"
-          src="{{teams[boxscores[boxScoreNumber].awayTeamId - 1].logoURL}}">
-        <!-- Away team name -->
-        <h3>{{ teams[boxscores[boxScoreNumber].awayTeamId - 1].name }} </h3>
-        <!-- Away points scored -->
-        <h4>{{ boxscores[boxScoreNumber].awayScore }}</h4>
+      <!-- Row 2 -->
+      <div style="background-color: dimgray; height: 2rem; color:lightgray">
+        <div style="width: 33%;">
+          <!-- home team projected -->
+
+        </div>
+
+        <div style="width: 33%;">
+          <!-- matchup indicator -->
+        </div>
+
+        <div style="width:33%">
+          <!-- away team projected -->
+        </div>
       </div>
+
     </div>
-
-    <!-- Row 2 -->
-    <div style="background-color: dimgray; height: 2rem; color:lightgray">
-      <div style="width: 33%;">
-        <!-- home team projected -->
-
-      </div>
-
-      <div style="width: 33%;">
-        <!-- matchup indicator -->
-      </div>
-
-      <div style="width:33%">
-        <!-- away team projected -->
-      </div>
-    </div>
-
-  </div>
+  </ng-template>
+</ngb-carousel>
 
 
   <!--
@@ -70,13 +80,13 @@
       -->
   <div style="overflow-y: scroll; height: 78%; background-color: dimgray ">
     <div *ngIf="isLoadedTeams && isLoadedMatchups">
-      <div *ngFor="let players of lineup">
+      <div class="carousel" *ngFor="let player of currentBoxscore.homeRoster; index as i">
         <mat-grid-list cols="20" rowHeight="3rem">
 
           <mat-grid-tile [colspan]="9" [rowspan]="1">
             <div
               style="vertical-align: bottom; height:100%; width: 100%; background-color: white; border-bottom: 1px solid grey;">
-              <app-matchup-player [player]=players.homePlayer>
+              <app-matchup-player [player]=currentBoxscore.homeRoster[i].player>
 
               </app-matchup-player>
             </div>
@@ -85,14 +95,14 @@
           <mat-grid-tile [colspan]="2" [rowspan]="1">
             <div
               style=" height: 100%; display:table-cell; vertical-align: middle; text-align:center; width: 100%; background-color: grey; border-bottom: 1px solid black;">
-              <p *ngIf="players.position != 'RB/WR/TE'" style="color: white; font-size: 1.5em;">{{players.position}}</p>
-              <p *ngIf="players.position == 'RB/WR/TE'" style="color: white; font-size: 1.5em;">FLEX</p>
+              <p *ngIf="currentBoxscore.homeRoster[i].position != 'RB/WR/TE'" style="color: white; font-size: 1.5em;">{{currentBoxscore.homeRoster[i].position}}</p>
+              <p *ngIf="currentBoxscore.homeRoster[i].position == 'RB/WR/TE'" style="color: white; font-size: 1.5em;">FLEX</p>
             </div>
           </mat-grid-tile>
 
           <mat-grid-tile [colspan]="9" [rowspan]="1">
             <div style="height: 100%; width: 100%; background-color: white; border-bottom: 1px solid grey;">
-              <app-matchup-player [player]=players.awayPlayer>
+              <app-matchup-player [player]=currentBoxscore.awayRoster[i].player>
 
               </app-matchup-player>
             </div>

@@ -7,8 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './view/app.component';
 import { PlayerListComponent } from './view/players-page/player-list/player-list.component';
 import { PlayerListItemComponent } from './view/players-page/player-list/player-list-item/player-list-item.component';
-
-import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { MatchupComponent } from './view/teams-page/matchup/matchup.component';
 import { TeamsPageComponent } from './view/teams-page/teams-page.component';
 import { PlayersPageComponent } from './view/players-page/players-page.component';
@@ -24,6 +22,8 @@ import { MatchupPlayerComponent } from './view/teams-page/matchup/matchup-player
 import { TeamInfoComponent } from './view/teams-page/team-info/team-info.component';
 import { TeamGraphComponent } from './view/teams-page/team-graph/team-graph.component';
 import { DashboardComponent } from './view/dashboard/dashboard.component';
+import { SlickModule} from "ngx-slick";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -55,10 +55,11 @@ import { DashboardComponent } from './view/dashboard/dashboard.component';
     MatSelectModule,
     MatDividerModule,
     MatListModule,
-    ScrollDispatchModule,
     MatGridListModule,
     FormsModule,
-    MatCardModule
+    MatCardModule,
+    NgbModule,
+    SlickModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
