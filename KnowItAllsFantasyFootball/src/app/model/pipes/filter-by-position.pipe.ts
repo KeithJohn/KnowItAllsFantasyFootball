@@ -1,7 +1,3 @@
-/**
- * TODO: Check if this is needed and clean up
- */
-
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
@@ -10,12 +6,15 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FilterByPositionPipe implements PipeTransform {
 
   transform(items: any, position: String): any {
+    //Check if there are no items, or if no search position
     if(!items) return [];
     if(!position) return items;
 
+    //filter list by search position
     return items.filter(player => {
       return player.eligiblePositions.includes(position);
-    })
+    });
+  
   }
 
 }

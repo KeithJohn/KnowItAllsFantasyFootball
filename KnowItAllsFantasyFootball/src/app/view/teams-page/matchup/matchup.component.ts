@@ -17,6 +17,7 @@ import {
 import { League } from 'src/app/model/models/league.model';
 import { LeagueService } from 'src/app/model/services/league.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { AppService } from 'src/app/model/services/app.service';
 
 @Component({
   selector: 'app-matchup',
@@ -36,12 +37,12 @@ export class MatchupComponent implements OnInit {
   lineup = [];
   numbers = [];
 
-  constructor(private leagueService: LeagueService ,private boxScoreService: BoxscoreService, private teamService: TeamService) {}
+  constructor(private appService: AppService,private leagueService: LeagueService ,private boxScoreService: BoxscoreService, private teamService: TeamService) {}
 
   ngOnInit() {
     this.getLineupInfo();
     this.getTeams()
-    this.getMatchups(2019, 1, 1);
+    this.getMatchups(this.appService.getSeasonId(), this.appService.getCurrentWeek(), this.appService.getCurrentWeek());
 
   }
 
