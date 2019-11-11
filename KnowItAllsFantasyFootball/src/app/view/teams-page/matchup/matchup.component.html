@@ -24,14 +24,13 @@
 -->
 <ngb-carousel *ngIf="isLoadedMatchups && isLoadedTeams" [showNavigationArrows]="true" [showNavigationIndicators]="true">
   <ng-template ngbSlide *ngFor="let boxscore of boxscores">
-    <div style="background-color: coral; height: 22%; width:80%">
+    <div style="background-color: coral; height: 22%; width:100%">
       <!-- Row 1 -->
-      <a><img src="../../../../assets/iconfinder_icon-ios7-arrow-back_211686.svg" style="margin:auto; height:22%; float:left"></a>
       <div style="height:10rem; overflow:hidden;">
         <div style="width: 50%; text-align: center; height:100%; padding-top: 10px; float:left">
           <!-- Home team photo -->
           <img style="display:block; margin:auto; height:4.5rem"
-               src="{{boxscore.homeTeamId - 1].logoURL}}">
+               src="{{teams[boxscore.homeTeamId - 1].logoURL}}">
           <!-- home team name -->
           <h3>{{ teams[boxscore.homeTeamId - 1].name }} </h3>
           <!-- home points scored -->
@@ -47,7 +46,6 @@
           <!-- Away points scored -->
           <h4>{{ boxscore.awayScore }}</h4>
         </div>
-        <a><img src="../../../../assets/iconfinder_icon-ios7-arrow-forward_211688.svg" style="margin:auto; height:22%; float:right"></a>
       </div>
 
       <!-- Row 2 -->

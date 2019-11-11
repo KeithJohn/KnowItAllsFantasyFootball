@@ -42,13 +42,16 @@ export class MatchupComponent implements OnInit {
   slideConfig = {"slidesToShow": this.boxscores.length, "slidesToScroll": this.boxscores.length}
 
   ngOnInit() {
+    console.log(this.appService.date)
+    console.log(this.appService.getSeasonId());
+    console.log(this.appService.getCurrentWeek());
     this.getLineupInfo();
     this.getTeams()
-    this.getMatchups(this.appService.getSeasonId(), this.appService.getCurrentWeek(), this.appService.getCurrentWeek());
+    this.getMatchups(this.appService.getSeasonId(), this.appService.getCurrentWeek() - 1, this.appService.getCurrentWeek() - 1);
   }
 
   getTeams() {
-    this.teamService.getTeamsAtWeek(2019, 1).subscribe(data => {
+    this.teamService.getTeamsAtWeek(this.appService.getSeasonId(), this.appService.getCurrentWeek() - 1).subscribe(data => {
       this.teams = data;
       this.isLoadedTeams = true;
       console.log(this.teams);
@@ -78,7 +81,7 @@ export class MatchupComponent implements OnInit {
   }
 
   getLineupInfo(){
-    this.leagueService.getLeagueInfo(2019).subscribe(data => {
+    this.leagueService.getLeagueInfo(this.appService.getSeasonId()).subscribe(data => {
       this.leagueInfo = data;
 
       this.lineupInfo = this.leagueInfo.rosterSettings.lineupPostionCount;
