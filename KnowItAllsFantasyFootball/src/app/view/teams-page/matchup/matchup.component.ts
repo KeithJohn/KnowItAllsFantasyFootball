@@ -18,6 +18,8 @@ import { League } from 'src/app/model/models/league.model';
 import { LeagueService } from 'src/app/model/services/league.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AppService } from 'src/app/model/services/app.service';
+import {BoxscorePlayer} from "../../../model/models/boxscore-player.model";
+
 
 @Component({
   selector: 'app-matchup',
@@ -32,18 +34,17 @@ export class MatchupComponent implements OnInit {
   leagueInfo:League;
   lineupInfo;
   teams: Team[] = [];
-  currentTeam: Team;
+  currentBoxscore: Boxscore;
   boxscores: Boxscore[] = [];
   lineup = [];
   numbers = [];
-
   constructor(private appService: AppService,private leagueService: LeagueService ,private boxScoreService: BoxscoreService, private teamService: TeamService) {}
+  slideConfig = {"slidesToShow": this.boxscores.length, "slidesToScroll": this.boxscores.length}
 
   ngOnInit() {
     this.getLineupInfo();
     this.getTeams()
     this.getMatchups(this.appService.getSeasonId(), this.appService.getCurrentWeek(), this.appService.getCurrentWeek());
-
   }
 
   getTeams() {
@@ -71,6 +72,7 @@ export class MatchupComponent implements OnInit {
 
       })
       this.getLineups();
+      this.currentBoxscore=this.boxscores[0];
       this.isLoadedMatchups = true;
     });
   }
@@ -167,97 +169,183 @@ export class MatchupComponent implements OnInit {
       return aPos - bPos;
     });
 
-    this.boxscores[this.boxScoreNumber].awayRoster.sort(function(a, b) {
-      var aPos:number;
-      var bPos:number;
-      switch (a.position){
-        case 'QB': {
-          aPos=1;
-          break;
+    this.boxscores.forEach(boxscore => {
+      boxscore.homeRoster.sort(function(a, b) {
+        var aPos:number;
+        var bPos:number;
+        //Give position numeric value for presentation in list
+        switch (a.position){
+          case 'QB': {
+            aPos=1;
+            break;
+          }
+          case 'RB': {
+            aPos=2;
+            break;
+          }
+          case 'WR': {
+            aPos=3;
+            break;
+          }
+          case 'TE': {
+            aPos=4;
+            break;
+          }
+          case 'RB/WR/TE': {
+            aPos=5;
+            break;
+          }
+          case 'D/ST': {
+            aPos=6;
+            break;
+          }
+          case 'K': {
+            aPos=7;
+            break;
+          }
+          case 'Bench': {
+            aPos=8;
+            break;
+          }
+          default: {
+            aPos=9;
+            break;
+          }
         }
-        case 'RB': {
-          aPos=2;
-          break;
+        switch (b.position){
+          case 'QB': {
+            bPos=1;
+            break;
+          }
+          case 'RB': {
+            bPos=2;
+            break;
+          }
+          case 'WR': {
+            bPos=3;
+            break;
+          }
+          case 'TE': {
+            bPos=4;
+            break;
+          }
+          case 'RB/WR/TE': {
+            bPos=5;
+            break;
+          }
+          case 'D/ST': {
+            bPos=6;
+            break;
+          }
+          case 'K': {
+            bPos=7;
+            break;
+          }
+          case 'Bench': {
+            bPos=8;
+            break;
+          }
+          default: {
+            bPos=9;
+            break;
+          }
         }
-        case 'WR': {
-          aPos=3;
-          break;
-        }
-        case 'TE': {
-          aPos=4;
-          break;
-        }
-        case 'RB/WR/TE': {
-          aPos=5;
-          break;
-        }
-        case 'D/ST': {
-          aPos=6;
-          break;
-        }
-        case 'K': {
-          aPos=7;
-          break;
-        }
-        case 'Bench': {
-          aPos=8;
-          break;
-        }
-        default: {
-          aPos=9;
-          break;
-        }
-      }
-
-      switch (b.position){
-        case 'QB': {
-          bPos=1;
-          break;
-        }
-        case 'RB': {
-          bPos=2;
-          break;
-        }
-        case 'WR': {
-          bPos=3;
-          break;
-        }
-        case 'TE': {
-          bPos=4;
-          break;
-        }
-        case 'RB/WR/TE': {
-          bPos=5;
-          break;
-        }
-        case 'D/ST': {
-          bPos=6;
-          break;
-        }
-        case 'K': {
-          bPos=7;
-          break;
-        }
-        case 'Bench': {
-          bPos=8;
-          break;
-        }
-        default: {
-          bPos=9;
-          break;
-        }
-      }
-      return aPos - bPos;
-    });
-    
-    for (var i = 0; i < this.boxscores[this.boxScoreNumber].homeRoster.length; i++) {
-      this.lineup.push({
-        homePlayer: this.boxscores[this.boxScoreNumber].homeRoster[i].player,
-        awayPlayer: this.boxscores[this.boxScoreNumber].awayRoster[i].player,
-        position: this.boxscores[this.boxScoreNumber].homeRoster[i].position
+        return aPos - bPos;
       });
-    }
-    console.log(this.lineup);
+
+      boxscore.awayRoster.sort(function(a, b) {
+        var aPos:number;
+        var bPos:number;
+        //Give position numeric value for presentation in list
+        switch (a.position){
+          case 'QB': {
+            aPos=1;
+            break;
+          }
+          case 'RB': {
+            aPos=2;
+            break;
+          }
+          case 'WR': {
+            aPos=3;
+            break;
+          }
+          case 'TE': {
+            aPos=4;
+            break;
+          }
+          case 'RB/WR/TE': {
+            aPos=5;
+            break;
+          }
+          case 'D/ST': {
+            aPos=6;
+            break;
+          }
+          case 'K': {
+            aPos=7;
+            break;
+          }
+          case 'Bench': {
+            aPos=8;
+            break;
+          }
+          default: {
+            aPos=9;
+            break;
+          }
+        }
+        switch (b.position){
+          case 'QB': {
+            bPos=1;
+            break;
+          }
+          case 'RB': {
+            bPos=2;
+            break;
+          }
+          case 'WR': {
+            bPos=3;
+            break;
+          }
+          case 'TE': {
+            bPos=4;
+            break;
+          }
+          case 'RB/WR/TE': {
+            bPos=5;
+            break;
+          }
+          case 'D/ST': {
+            bPos=6;
+            break;
+          }
+          case 'K': {
+            bPos=7;
+            break;
+          }
+          case 'Bench': {
+            bPos=8;
+            break;
+          }
+          default: {
+            bPos=9;
+            break;
+          }
+        }
+        return aPos - bPos;
+      });
+
+    });
+
+    // for (var i = 0; i < this.boxscores[this.boxScoreNumber].homeRoster.length; i++) {
+    //   this.lineup.push({
+    //     homePlayer: this.boxscores[this.boxScoreNumber].homeRoster[i].player,
+    //     awayPlayer: this.boxscores[this.boxScoreNumber].awayRoster[i].player,
+    //     position: this.boxscores[this.boxScoreNumber].homeRoster[i].position
+    //   });
+    // }
+    // console.log(this.lineup);
 
     this.isLoadedLineups = true;
   }
