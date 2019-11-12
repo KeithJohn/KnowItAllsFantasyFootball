@@ -24,6 +24,7 @@ import { TeamGraphComponent } from './view/teams-page/team-graph/team-graph.comp
 import { DashboardComponent } from './view/dashboard/dashboard.component';
 import { SlickModule} from "ngx-slick";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     FormsModule,
     MatCardModule,
     NgbModule,
-    SlickModule.forRoot()
+    SlickModule.forRoot(),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

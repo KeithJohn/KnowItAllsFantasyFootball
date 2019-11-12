@@ -46,6 +46,7 @@ export class PlayerListComponent implements OnInit {
         this.freeAgentService.getFreeAgents(seasonId, scoringPeriodId).subscribe(data => {
           let freeAgents: FreeAgent[] = data;
           freeAgents.forEach(freeAgent => {
+            console.log(freeAgent);
             var teamInfo = this.getTeamInfo(freeAgent.player)
             freeAgent.player.teamId = teamInfo.teamId;
             freeAgent.player.teamName = teamInfo.teamName;

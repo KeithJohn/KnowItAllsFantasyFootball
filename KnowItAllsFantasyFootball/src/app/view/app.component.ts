@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FreeAgentService } from '../model/services/free-agent.service';
+import { TestService } from '../test.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +9,11 @@ import { Component } from '@angular/core';
 })
 // TODO: Move all getting of info here. Pass down all necessary info from here. 
 // TODO: Calculate all projected stats in the services. 
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'KnowItAllsFantasyFootball';
+  constructor(private testService: TestService,private freeAgentService: FreeAgentService ){}
+  ngOnInit() {
+    this.testService.getFreeAgent();
+    
+  }
 }
