@@ -34,9 +34,6 @@ export class MatchupComponent implements OnInit {
   teams: Team[] = [];
   currentBoxscore: Boxscore;
   boxscores: Boxscore[] = [];
-  lineup = [];
-  numbers = [];
-  slideConfig = {"slidesToShow": this.boxscores.length, "slidesToScroll": this.boxscores.length}
   constructor(private leagueService: LeagueService ,private boxScoreService: BoxscoreService, private teamService: TeamService) {}
 
   ngOnInit() {
@@ -336,15 +333,11 @@ export class MatchupComponent implements OnInit {
 
     });
 
-    // for (var i = 0; i < this.boxscores[this.boxScoreNumber].homeRoster.length; i++) {
-    //   this.lineup.push({
-    //     homePlayer: this.boxscores[this.boxScoreNumber].homeRoster[i].player,
-    //     awayPlayer: this.boxscores[this.boxScoreNumber].awayRoster[i].player,
-    //     position: this.boxscores[this.boxScoreNumber].homeRoster[i].position
-    //   });
-    // }
-    // console.log(this.lineup);
-
     this.isLoadedLineups = true;
+  }
+  onSlide(event){
+    console.log(parseInt(event.current.replace("ngb-slide-", ""), 10));
+    let slideIndex=parseInt(event.current.replace("ngb-slide-", ""), 10);
+    this.currentBoxscore=this.boxscores[slideIndex];
   }
 }
