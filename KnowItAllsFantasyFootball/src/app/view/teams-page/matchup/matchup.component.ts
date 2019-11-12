@@ -17,7 +17,9 @@ import {
 import { League } from 'src/app/model/models/league.model';
 import { LeagueService } from 'src/app/model/services/league.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { AppService } from 'src/app/model/services/app.service';
 import {BoxscorePlayer} from "../../../model/models/boxscore-player.model";
+
 
 @Component({
   selector: 'app-matchup',
@@ -34,16 +36,22 @@ export class MatchupComponent implements OnInit {
   teams: Team[] = [];
   currentBoxscore: Boxscore;
   boxscores: Boxscore[] = [];
-  constructor(private leagueService: LeagueService ,private boxScoreService: BoxscoreService, private teamService: TeamService) {}
+  lineup = [];
+  numbers = [];
+  constructor(private appService: AppService,private leagueService: LeagueService ,private boxScoreService: BoxscoreService, private teamService: TeamService) {}
+  slideConfig = {"slidesToShow": this.boxscores.length, "slidesToScroll": this.boxscores.length}
 
   ngOnInit() {
+    console.log(this.appService.date)
+    console.log(this.appService.getSeasonId());
+    console.log(this.appService.getCurrentWeek());
     this.getLineupInfo();
     this.getTeams()
-    this.getMatchups(2019, 1, 1)
+    this.getMatchups(this.appService.getSeasonId(), this.appService.getCurrentWeek() - 1, this.appService.getCurrentWeek() - 1);
   }
 
   getTeams() {
-    this.teamService.getTeamsAtWeek(2019, 1).subscribe(data => {
+    this.teamService.getTeamsAtWeek(this.appService.getSeasonId(), this.appService.getCurrentWeek() - 1).subscribe(data => {
       this.teams = data;
       this.isLoadedTeams = true;
       console.log(this.teams);
@@ -73,7 +81,7 @@ export class MatchupComponent implements OnInit {
   }
 
   getLineupInfo(){
-    this.leagueService.getLeagueInfo(2019).subscribe(data => {
+    this.leagueService.getLeagueInfo(this.appService.getSeasonId()).subscribe(data => {
       this.leagueInfo = data;
 
       this.lineupInfo = this.leagueInfo.rosterSettings.lineupPostionCount;

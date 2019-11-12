@@ -4,14 +4,15 @@
 import { Injectable } from '@angular/core';
 import { Client } from 'espn-fantasy-football-api/web';
 import { Observable, from } from 'rxjs';
+import { AppService } from './app.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LeagueService {
   client;
-  constructor() { 
-    this.client = new Client({leagueId: 58438855});
+  constructor(private appService:AppService) { 
+    this.client = new Client({leagueId: appService.getLeagueId()});
   }
 
   getLeagueInfo(seasonId: number): Observable<any>{

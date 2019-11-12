@@ -4,14 +4,16 @@
 import { Injectable } from '@angular/core';
 import { Client } from 'espn-fantasy-football-api/web';
 import {Observable, from } from "rxjs";
+import { AppService } from './app.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FreeAgentService {
   client;
-  constructor() {
-    this.client = new Client({leagueId: 58438855});
+
+  constructor(private appService: AppService) {
+    this.client = new Client({leagueId: appService.getLeagueId()});
   }
 
   getFreeAgents(seasonId: number, scoringPeriodId: number):Observable<any> {
