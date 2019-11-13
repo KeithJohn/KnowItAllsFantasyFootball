@@ -42,9 +42,6 @@ export class MatchupComponent implements OnInit {
   slideConfig = {"slidesToShow": this.boxscores.length, "slidesToScroll": this.boxscores.length}
 
   ngOnInit() {
-    console.log(this.appService.date)
-    console.log(this.appService.getSeasonId());
-    console.log(this.appService.getCurrentWeek());
     this.getLineupInfo();
     this.getTeams()
     this.getMatchups(this.appService.getSeasonId(), this.appService.getCurrentWeek() - 1, this.appService.getCurrentWeek() - 1);
@@ -54,26 +51,14 @@ export class MatchupComponent implements OnInit {
     this.teamService.getTeamsAtWeek(this.appService.getSeasonId(), this.appService.getCurrentWeek() - 1).subscribe(data => {
       this.teams = data;
       this.isLoadedTeams = true;
-      console.log(this.teams);
     })
   }
 
   //TODO: Add team name for away and home for boxscore.
   getMatchups(seasonId: number, matchupPeriodId: number, scoringPeriodId: number) {
     this.boxScoreService.getBoxscores(seasonId, matchupPeriodId, scoringPeriodId).subscribe(data => {
-      console.log(data);
       this.boxscores = data;
-      this.boxscores.forEach(boxscore => {
-        let awayTeam = this.teams[this.teams.findIndex(team => {
-          return team.id == boxscore.awayTeamId
-        })];
-        let homeTeam = this.teams[this.teams.findIndex(team => {
-          return team.id == boxscore.homeTeamId
-        })];
-
-        console.log(boxscore);
-
-      })
+      this.boxScoreService.getProjectedScores(this.boxscores);
       this.getLineups();
       this.currentBoxscore=this.boxscores[0];
       this.isLoadedMatchups = true;

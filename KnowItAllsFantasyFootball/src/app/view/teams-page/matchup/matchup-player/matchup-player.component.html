@@ -7,12 +7,12 @@
 
   <div style="width:100%; background-color:white">
       <div style=" float:left; width: 80%; height:100%; padding:5px">
-          <p style="display: inline; font-weight: bold;">{{player.firstName.charAt(0)}} {{player.lastName}}, </p> 
-          <p style="display: inline;">{{player.proTeamAbbreviation}}</p>
+          <p style="display: inline; font-weight: bold;">{{player.player.firstName.charAt(0)}} {{player.player.lastName}}, </p>
+          <p style="display: inline;">{{player.player.proTeamAbbreviation}}</p>
           <p>stat: 1</p>
       </div>
       <div style=" float:right; text-align: center; width: 20%; height: 100%;">
-          <p style="font-size: 1.5rem; color: blue; font-weight:500;">12.2</p>
+          <p style="font-size: 1.5rem; color: blue; font-weight:500;">{{player.totalPoints | number: '1.2-2'}}</p>
       </div>
   </div>
 

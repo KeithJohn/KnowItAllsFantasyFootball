@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {Player} from "../../../../model/models/player.model";
+import {BoxscorePlayer} from "../../../../model/models/boxscore-player.model";
 
 @Component({
   selector: 'app-matchup-player',
@@ -7,11 +8,11 @@ import {Player} from "../../../../model/models/player.model";
   styleUrls: ['./matchup-player.component.sass']
 })
 export class MatchupPlayerComponent implements OnInit {
-  @Input() player:Player;
+  @Input() player: BoxscorePlayer;
   constructor() { }
 
   ngOnInit() {
-    
+
   }
 
 }

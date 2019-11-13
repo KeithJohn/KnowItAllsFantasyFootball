@@ -1,21 +1,21 @@
 /** TODO:
  *      Check if this is needed and clean up
- *      Add additional necessary variables 
+ *      Add additional necessary variables
  */
 
 import { BoxscorePlayer } from './boxscore-player.model';
 
 export interface Boxscore {
     /**
-     *  Score of home team 
+     *  Score of home team
      */
 
     homeScore: number;
-    
+
     /**
      *  Id of home team
      */
-    
+
     homeTeamId: number;
 
     /**
@@ -25,20 +25,31 @@ export interface Boxscore {
     homeRoster: BoxscorePlayer[]
 
     /**
-     *  Score of away team 
+     *  Score of away team
      */
 
     awayScore: number;
-    
+
     /**
      *  Id of away team
      */
-    
+
     awayTeamId: number;
 
     /**
      *  Roster of the away team
      */
 
-    awayRoster: BoxscorePlayer[]
+    awayRoster: BoxscorePlayer[];
+
+    /**
+     * Projected score for home team
+     */
+
+    homeProjectedScore: number;
+
+    /**
+     * Projected score for away team
+     */
+    awayProjectedScore: number;
 }
