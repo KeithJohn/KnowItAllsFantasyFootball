@@ -46,4 +46,9 @@ export interface BoxscorePlayer {
      *  Total projected points scored by the player
      */
     totalProjPoints: number;
+
+    /**
+    * Top stats based on position
+    */
+    topStats: Object[];
 }
