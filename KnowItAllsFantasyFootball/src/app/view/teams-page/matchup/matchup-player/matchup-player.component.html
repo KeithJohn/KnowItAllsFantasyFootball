@@ -1,18 +1,19 @@
-<!-- TODO: Player name, pro team abrev -->
-<!-- TODO: yards, tds, stats -->
-<!-- TODO: points scored -->
-<!-- TODO: See mathchup component for rest of todos. -->
+<!-- TODO: Fix Scroll -->
 
 <div class="grid-container" style="height: 100%;">
 
   <div style="width:100%; background-color:white">
       <div style=" float:left; width: 80%; height:100%; padding:5px">
-          <p style="display: inline; font-weight: bold;">{{player.firstName.charAt(0)}} {{player.lastName}}, </p> 
-          <p style="display: inline;">{{player.proTeamAbbreviation}}</p>
-          <p>stat: 1</p>
+        <div style="height: 100%; padding-top: 2px;">
+          <p *ngIf="player.player.lastName != 'D/ST'" style="display: inline; font-weight: bold; font-size: 1.5em">{{player.player.firstName.charAt(0)}} {{player.player.lastName}}, </p>
+          <p *ngIf="player.player.lastName == 'D/ST'" style="display: inline; font-weight: bold; font-size: 1.5em">{{player.player.firstName}} {{player.player.lastName}}, </p>
+          <p style="display: inline;">{{player.player.proTeamAbbreviation}}</p>
+        </div>
       </div>
       <div style=" float:right; text-align: center; width: 20%; height: 100%;">
-          <p style="font-size: 1.5rem; color: blue; font-weight:500;">12.2</p>
+          <p *ngIf="player.totalPoints" style="font-size: 1.5rem; color: blue; font-weight:500;">{{player.totalPoints | number: '1.2-2'}}</p>
+          <p *ngIf="!player.totalPoints && player.totalProjPoints" style="font-size: 1.5rem; color: grey; font-weight:500;">{{player.totalProjPoints | number: '1.2-2'}}</p>
+          <p *ngIf="!player.totalPoints && !player.totalProjPoints" style="font-size: 1.5rem; color: grey; font-weight:500;">-</p>
       </div>
   </div>
 

@@ -1,6 +1,6 @@
 /** TODO:
  *      Check if this is needed and clean up
- *      Add additional necessary variables 
+ *      Add additional necessary variables
  */
 
 import { Player } from './player.model';
@@ -8,7 +8,7 @@ import { PlayerStats } from './player-stats.model';
 
 export interface BoxscorePlayer {
     /**
-     *  Player Information 
+     *  Player Information
      */
     player: Player;
 
@@ -18,7 +18,7 @@ export interface BoxscorePlayer {
     pointBreakdown: PlayerStats;
 
     /**
-     *  Position of the player in Lineup 
+     *  Position of the player in Lineup
      */
     position: String;
 
@@ -28,7 +28,7 @@ export interface BoxscorePlayer {
     projectedPointBreakdown: PlayerStats;
 
     /**
-     *  Projected Raw stats 
+     *  Projected Raw stats
      */
     projectedRawStats: PlayerStats;
 
@@ -41,4 +41,14 @@ export interface BoxscorePlayer {
      * Total Points scored by the player
      */
     totalPoints: number;
+
+    /**
+     *  Total projected points scored by the player
+     */
+    totalProjPoints: number;
+
+    /**
+    * Top stats based on position
+    */
+    topStats: Object[];
 }
