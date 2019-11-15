@@ -1,21 +1,25 @@
 import { Injectable } from '@angular/core';
+import { Client } from 'espn-fantasy-football-api/web';
+import { Observable, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AppService {
   leagueId: number;
   date:Date;
   seasonId: number;
   currentWeek: number;
-  
+  client;
 
   constructor() {
     this.leagueId = 58438855;
     this.date = new Date();
     this.seasonId = this.calculateSeasonId();
     this.currentWeek = this.calculateCurrentWeek();
-   }
+    this.client = new Client({leagueId: this.getLeagueId()});
+  }
 
   calculateSeasonId(): number{
     return this.date.getFullYear();
@@ -93,7 +97,6 @@ export class AppService {
       // 12/24 - 12/31
       return 17;
     }
-
     return 0;
   }
 
@@ -112,4 +115,34 @@ export class AppService {
   getCurrentWeek(): number {
     return this.currentWeek;
   }
+
+  getLeagueInfo(){
+    //get league info
+    this.client.getLeagueInfo({seasonId: this.getSeasonId()});
+  }
+
+  getNFLGames(){
+    //get all nfl games
+    //this.client.getNFLGamesForPeriod({startDate: startDate, endDate: endDate});
+  
+  }
+
+  getBoxscores(){
+    //get boxscores for each week.
+    //add to map
+    //get projected score for each week
+
+  }
+
+  getTeams(){
+    //get teams add to map. 
+    //get players and create a map of players with projected and actual
+    //add team Id to player in player map.
+  }
+  
+  getPlayers(){
+    //get free agents
+    //get proj and actual score by week
+  }
+
 }

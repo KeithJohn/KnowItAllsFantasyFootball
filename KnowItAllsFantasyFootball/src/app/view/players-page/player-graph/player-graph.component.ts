@@ -12,4 +12,10 @@ export class PlayerGraphComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Add projected vs actual score graph
+   * Upcoming schedule
+   * projecteds and rankings and blurbs
+   * 
+   */
 }
