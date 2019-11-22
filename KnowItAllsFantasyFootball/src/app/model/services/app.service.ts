@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 import {FreeAgent} from "../models/free-agent-player.model";
-import { Client } from 'espn-fantasy-football-api/web';
 import { HttpClient } from '@angular/common/http';
 import {Player} from "../models/player.model";
 import {Team} from "../models/team.model";
 import {Boxscore} from "../models/boxscore.model";
 import {from} from "rxjs";
 import {error} from "util";
+import { Client } from 'espn-fantasy-football-api/web';
 
 @Injectable({
   providedIn: 'root'
 })
-
 /**
  * TODO: Clean up, Add league info get and all other client functions
- * TODO: Fix all async issues with getting teams, 
+ * TODO: Fix all async issues with getting teams,
  *
  */
 export class AppService {
@@ -34,7 +33,8 @@ export class AppService {
     this.seasonId = this.calculateSeasonId();
     this.currentWeek = this.calculateCurrentWeek();
     //this.initializeData();
-   }
+
+  }
 
   calculateSeasonId(): number{
     return this.date.getFullYear();
@@ -252,5 +252,21 @@ export class AppService {
   }
   getBoxscoresMap(){
     return this.boxscoresMap;
+  }
+
+  getLeagueInfo(){
+    //get league info
+    this.client.getLeagueInfo({seasonId: this.getSeasonId()});
+  }
+
+  getNFLGames(){
+    //get all nfl games
+    //this.client.getNFLGamesForPeriod({startDate: startDate, endDate: endDate});
+
+  }
+
+  getPlayers(){
+    //get free agents
+    //get proj and actual score by week
   }
 }
