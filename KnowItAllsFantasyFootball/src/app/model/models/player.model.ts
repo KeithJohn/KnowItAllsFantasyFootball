@@ -1,10 +1,11 @@
 /** TODO:
  *      Check if this is needed and clean up
- *      Add additional necessary variables 
+ *      Add additional necessary variables
  */
 
 import { AvailabilityStatus } from '../enums/availability-status.enum';
 import { InjuryStatus } from '../enums/injury-status.enum';
+import {PlayerStats} from "./player-stats.model";
 
 export class Player {
   teamId: number;
@@ -46,19 +47,19 @@ export class Player {
    * Injury status of the player.
    * Options:
    *  'ACTIVE'
-   *  'BEREAVEMENT' 
+   *  'BEREAVEMENT'
    *  'DAY_TO_DAY'
    *  'DOUBTFUL'
-   *  'FIFTEEN_DAY_DL' 
-   *  'INJURY_RESERVE' 
-   *  'OUT' 
-   *  'PATERNITY' 
-   *  'PROBABLE' 
-   *  'QUESTIONABLE' 
-   *  'SEVEN_DAY_DL' 
-   *  'SIXTY_DAY_DL' 
+   *  'FIFTEEN_DAY_DL'
+   *  'INJURY_RESERVE'
+   *  'OUT'
+   *  'PATERNITY'
+   *  'PROBABLE'
+   *  'QUESTIONABLE'
+   *  'SEVEN_DAY_DL'
+   *  'SIXTY_DAY_DL'
    *  'SUSPENSION'
-   *  'TEN_DAY_DL'   
+   *  'TEN_DAY_DL'
    */
   injuryStaus: InjuryStatus;
 
@@ -66,7 +67,7 @@ export class Player {
    *  Boolean representing whether or not the player is droppable.
    */
   isDroppable: boolean;
-  
+
   /**
    *  Boolean representing whether or not the player is injured.
    */
@@ -100,7 +101,7 @@ export class Player {
   /**
    *  Average auction value of the player.
    */
-  auctionVauleAverage?: number; 
+  auctionVauleAverage?: number;
 
   /**
    *  Average position the player was drafted.
@@ -108,8 +109,8 @@ export class Player {
   averageDraftPosition?: number;
 
   /**
-   *  Percent of change in terms of adding or dropping from teams. 
-   *    If the player was added the number will be positive, negative if dropped. 
+   *  Percent of change in terms of adding or dropping from teams.
+   *    If the player was added the number will be positive, negative if dropped.
    */
   percentChange?: number;
 
@@ -122,7 +123,17 @@ export class Player {
    * Percentage of leagues in which a team starts this player.
    */
   percentStarted?: number;
+
   teamName: String;
+
+  seasonRawStats: PlayerStats;
+
+  projectedSeasonRawStats: PlayerStats;
+
+  projPointsByWeek: Map<number, number>;
+
+  pointsByWeek: Map<number, number>;
+
 
   getPosition(): String{
     if(this.eligiblePositions.includes("QB")){
@@ -139,5 +150,5 @@ export class Player {
       return "K";
     }
   }
-  
+
 }

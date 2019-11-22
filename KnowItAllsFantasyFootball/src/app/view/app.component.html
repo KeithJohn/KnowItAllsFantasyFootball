@@ -159,7 +159,7 @@
 
   a:hover {
     color: #125699;
-  } 
+  }
 
   .terminal {
     position: relative;
@@ -306,7 +306,7 @@
 
 <!-- https://code-maze.com/angular-material-navigation/ -->
 
-<!-- TODO: 
+<!-- TODO:
       Add enter of information that will allow user to enter league id and certificate stuff
       Add basic cards for each page (teams, players, draft) with information of each page.
       Make football logo to replace angular logo with
@@ -315,20 +315,20 @@
 -->
 
 <!-- Toolbar -->
-<div style="width: 100%; height: 100%;">
+<div *ngIf = doneLoading style="width: 100%; height: 100%;">
   <div class="toolbar" role="banner">
     <img width="40" alt="Angular Logo"
       src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==" />
     <a style="font-size: 1.25rem;color:white;" routerLink="/">Know It Alls Fantasy Football</a>
-    
+
     <div style="padding-left: 20px; padding-right: 10px;">
       <a class="routerLink" routerLink="/teams" routerLinkActive="active-link">Teams</a>
     </div>
-    
+
     <div style="padding-left: 10px; padding-right: 10px;">
       <a class="routerLink" routerLink="/players" routerLinkActive="active-link">Players</a>
     </div>
-    
+
     <div style="padding-left: 10px; padding-right:10px;">
       <a class="routerLink" routerLink="/draft" routerLinkActive="active-link">Draft</a>
     </div>

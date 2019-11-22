@@ -1,5 +1,5 @@
 import {
-  Component,
+  Component, Input,
   OnInit
 } from '@angular/core';
 import {
@@ -33,36 +33,41 @@ export class MatchupComponent implements OnInit {
   isLoadedLineups: boolean = false;
   leagueInfo:League;
   lineupInfo;
-  teams: Team[] = [];
+  @Input() teamsMap;
   currentBoxscore: Boxscore;
-  boxscores: Boxscore[] = [];
-  lineup = [];
-  numbers = [];
+  @Input() boxscoresMap: Map<number, Boxscore[]>;
+  boxscoresForWeek: Boxscore[];
+
   constructor(private appService: AppService,private leagueService: LeagueService ,private boxScoreService: BoxscoreService, private teamService: TeamService) {}
-  slideConfig = {"slidesToShow": this.boxscores.length, "slidesToScroll": this.boxscores.length}
+
 
   ngOnInit() {
     this.getLineupInfo();
-    this.getTeams()
-    this.getMatchups(this.appService.getSeasonId(), this.appService.getCurrentWeek() - 1, this.appService.getCurrentWeek() - 1);
+    //console.log(this.appService.boxscoresMap);
+    //console.log(this.boxscoresMap.keys());
+    this.boxscoresMap = this.appService.getBoxscoresMap();
+    this.boxscoresForWeek = this.boxscoresMap.get(this.appService.getCurrentWeek());
+    console.log(this.boxscoresForWeek);
+    //console.log(this.appService.getCurrentWeek());
+    //console.log(this.boxscoresForWeek);
+    // this.getTeams()
+    //this.getMatchups();
+    let slideConfig = {"slidesToShow": 4, "slidesToScroll": 4}
   }
 
-  getTeams() {
-    this.teamService.getTeamsAtWeek(this.appService.getSeasonId(), this.appService.getCurrentWeek() - 1).subscribe(data => {
-      this.teams = data;
-      this.isLoadedTeams = true;
-    })
-  }
+  // getTeams() {
+  //   this.teamService.getTeamsAtWeek(this.appService.getSeasonId(), this.appService.getCurrentWeek() - 1).subscribe(data => {
+  //     this.teams = data;
+  //     this.isLoadedTeams = true;
+  //   })
+  // }
 
   //TODO: Add team name for away and home for boxscore.
-  getMatchups(seasonId: number, matchupPeriodId: number, scoringPeriodId: number) {
-    this.boxScoreService.getBoxscores(seasonId, matchupPeriodId, scoringPeriodId).subscribe(data => {
-      this.boxscores = data;
-      this.boxScoreService.getProjectedScores(this.boxscores);
-      this.getLineups();
-      this.currentBoxscore=this.boxscores[0];
+  getMatchups() {
+      //this.boxScoreService.getProjectedScores(this.boxscoresForWeek);
+      //this.getLineups();
+      this.currentBoxscore=this.boxscoresForWeek[0];
       this.isLoadedMatchups = true;
-    });
   }
 
   getLineupInfo(){
@@ -74,7 +79,7 @@ export class MatchupComponent implements OnInit {
   }
 
   getLineups() {
-    this.boxscores[this.boxScoreNumber].homeRoster.sort(function(a, b) {
+    this.boxscoresForWeek[this.boxScoreNumber].homeRoster.sort(function(a, b) {
       var aPos:number;
       var bPos:number;
       switch (a.position){
@@ -157,7 +162,7 @@ export class MatchupComponent implements OnInit {
       return aPos - bPos;
     });
 
-    this.boxscores.forEach(boxscore => {
+    this.boxscoresForWeek.forEach(boxscore => {
       boxscore.homeRoster.sort(function(a, b) {
         var aPos:number;
         var bPos:number;
@@ -331,6 +336,6 @@ export class MatchupComponent implements OnInit {
   onSlide(event){
     console.log(parseInt(event.current.replace("ngb-slide-", ""), 10));
     let slideIndex=parseInt(event.current.replace("ngb-slide-", ""), 10);
-    this.currentBoxscore=this.boxscores[slideIndex];
+    this.currentBoxscore=this.boxscoresForWeek[slideIndex];
   }
 }

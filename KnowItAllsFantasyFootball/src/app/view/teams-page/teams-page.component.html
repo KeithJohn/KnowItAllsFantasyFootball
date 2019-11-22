@@ -5,7 +5,7 @@
   <!-- TODO: Add slider for list -->
   <mat-grid-tile [rowspan]="2" [style.background]='lightblue'>
     <div style="background-color: lightblue; width: 95%; height: 95%;">
-      <app-matchup></app-matchup>
+      <app-matchup [boxscoresMap]="boxscoresMap" [teamsMap]="teamsMap"></app-matchup>
     </div>
   </mat-grid-tile>
 
@@ -17,7 +17,7 @@
   <!-- TODO -->
   <mat-grid-tile>
     <div style="background-color: lightgreen; width: 95%; height: 95%;">
-      <app-team-info></app-team-info>
+      <app-team-info [teamsMap]="teamsMap"></app-team-info>
     </div>
   </mat-grid-tile>
 

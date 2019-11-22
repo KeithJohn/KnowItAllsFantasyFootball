@@ -18,16 +18,16 @@
         Beautify fonts
 -->
 <ngb-carousel *ngIf="isLoadedMatchups && isLoadedTeams" [interval]=0 [showNavigationArrows]="true" [showNavigationIndicators]="true" (slide)="onSlide($event)">
-  <ng-template ngbSlide *ngFor="let boxscore of boxscores">
+  <ng-template ngbSlide *ngFor="let boxscore of boxscoresForWeek">
     <div style="background-color: coral; height: 22%; width:100%">
       <!-- Row 1 -->
       <div style="height:10rem; overflow:hidden;">
         <div style="width: 50%; text-align: center; height:100%; padding-top: 10px; float:left">
           <!-- Home team photo -->
           <img style="display:block; margin:auto; height:4.5rem"
-               src="{{teams[boxscore.homeTeamId - 1].logoURL}}">
+               src="{{teamsMap.get(boxscore.homeTeamId).logoURL}}">
           <!-- home team name -->
-          <h3>{{ teams[boxscore.homeTeamId - 1].name }} </h3>
+          <h3>{{ teamsMap.get(boxscore.homeTeamId).name }} </h3>
           <!-- home points scored -->
           <h4>{{ boxscore.homeScore }}</h4>
         </div>
@@ -35,9 +35,9 @@
         <div style="width: 50%; text-align: center; height:100%; padding-top: 10px; float:right">
           <!-- Away team photo -->
           <img style="display:block; margin:auto; height:4.5rem;"
-               src="{{teams[boxscore.awayTeamId - 1].logoURL}}">
+               src="{{teamsMap.get(boxscore.awayTeamId).logoURL}}">
           <!-- Away team name -->
-          <h3>{{ teams[boxscore.awayTeamId - 1].name }} </h3>
+          <h3>{{ teamsMap.get(boxscore.awayTeamId).name }} </h3>
           <!-- Away points scored -->
           <h4>{{ boxscore.awayScore }}</h4>
         </div>
