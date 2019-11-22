@@ -4,8 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import {Player} from "../models/player.model";
 import {Team} from "../models/team.model";
 import {Boxscore} from "../models/boxscore.model";
-import {from} from "rxjs";
-import {error} from "util";
 import { Client } from 'espn-fantasy-football-api/web';
 
 @Injectable({
@@ -13,7 +11,6 @@ import { Client } from 'espn-fantasy-football-api/web';
 })
 /**
  * TODO: Clean up, Add league info get and all other client functions
- * TODO: Fix all async issues with getting teams,
  *
  */
 export class AppService {
@@ -27,13 +24,12 @@ export class AppService {
   boxscoresMap: Map<number, Boxscore[]>;
 
   constructor(private http: HttpClient) {
+    //Add ability for user to set this
     this.setLeagueId(58438855);
     this.client = new Client({leagueId: this.getLeagueId()});
     this.date = new Date();
     this.seasonId = this.calculateSeasonId();
     this.currentWeek = this.calculateCurrentWeek();
-    //this.initializeData();
-
   }
 
   calculateSeasonId(): number{
@@ -142,29 +138,27 @@ export class AppService {
     });
   }
 
-
   getPlayersAndTeams(){
     let service = this;
     this.playerMap = new Map<number, any>();
     //Populate map
-    let seasonId = this.getSeasonId();
-    let currentWeek = this.getCurrentWeek();
-    let currentFreeAgentRequest = service.http.get(`https://fantasy.espn.com/apis/v3/games/ffl/seasons/2019/segments/0/leagues/58438855?scoringPeriodId=${currentWeek}&view=kona_player_info`).toPromise();//this.client.getFreeAgents(2019, 1);
+    //TODO: Figure out why this won't use client
+    let currentFreeAgentRequest = service.http.get(`https://fantasy.espn.com/apis/v3/games/ffl/seasons/2019/segments/0/leagues/58438855?scoringPeriodId=${service.getCurrentWeek()}&view=kona_player_info`).toPromise();//this.client.getFreeAgents(2019, 1);
     return new Promise(function(resolve, reject)  {
       currentFreeAgentRequest.then(playersList => {
-        console.log("Request good");
-
         let freeAgents: FreeAgent[] = playersList['players'];
         freeAgents.forEach(freeAgent => {
           let player = freeAgent.player;
           player.seasonRawStats = freeAgent.rawStats;
           player.projectedSeasonRawStats = freeAgent.projectRawStats;
+          player.projPointsByWeek = new Map();
+          player.pointsByWeek = new Map();
           service.playerMap.set(player.id, player);
         });
 
         //Loop through weeks to get projected and actual scored for the week
         for(let week = 1; week < 18; week++){
-          let freeAgentRequestForWeek = service.http.get(`https://fantasy.espn.com/apis/v3/games/ffl/seasons/2019/segments/0/leagues/58438855?scoringPeriodId=${week}&view=kona_player_info`).toPromise();
+          let freeAgentRequestForWeek = service.http.get(`https://fantasy.espn.com/apis/v3/games/ffl/seasons/${service.seasonId}/segments/0/leagues/58438855?scoringPeriodId=${week}&view=kona_player_info`).toPromise();
           freeAgentRequestForWeek.then(playersForWeek => {
             let players = playersForWeek['players'];
             let projPointsForWeek = 0;
@@ -172,7 +166,7 @@ export class AppService {
             players.forEach(player => {
               player.player.stats.forEach(stat => {
                 if(!stat.hasOwnProperty('appliedAverage')) {
-                  if(stat.externalId == `2019${week}`){
+                  if(stat.externalId == `${service.seasonId}${week}`){
                     projPointsForWeek = stat.appliedTotal;
                   }else{
                     pointsForWeek = stat.appliedTotal
@@ -180,20 +174,16 @@ export class AppService {
                 }
               });
               let playerInfo = service.playerMap.get(player.id);
-              playerInfo.projPointsByWeek = new Map();
-              playerInfo.pointsByWeek = new Map();
               playerInfo.projPointsByWeek.set(week, projPointsForWeek);
               playerInfo.pointsByWeek.set(week, pointsForWeek);
               service.playerMap.set(player.id, playerInfo);
             });
           });
         }
-        //TODO: Maybe move to intialize data in then
         service.getTeams();
         resolve(service.playerMap);
       }, error => {
-        console.log("Request Bad");
-        console.log(error);
+        console.log("Bad Free Agent Request");
         reject(error);
       });
     });
@@ -203,8 +193,7 @@ export class AppService {
     this.teamMap = new Map();
     let service = this;
     return new Promise(function(resolve, reject) {
-      //TODO: figure out why this isn't working with variables.
-      let teamsRequest = service.client.getTeamsAtWeek({seasonId: 2019, scoringPeriodId: 11 });
+      let teamsRequest = service.client.getTeamsAtWeek({seasonId: service.seasonId, scoringPeriodId: service.getCurrentWeek()});
       teamsRequest.then( teamsInfo => {
         let teams: Team[] = teamsInfo;
         teams.forEach(team => {
@@ -218,7 +207,7 @@ export class AppService {
         });
         resolve(service.teamMap);
       }, error => {
-        console.log(error);
+        console.log("Bad Teams Request");
         reject(error);
       });
     });
@@ -235,7 +224,7 @@ export class AppService {
           let boxscores: Boxscore[] = boxscoresInfo;
           service.boxscoresMap.set(week, boxscores);
         }, error => {
-          console.log(error);
+          console.log("Bad Boxscores Request");
           reject(error);
         });
       }
@@ -254,19 +243,16 @@ export class AppService {
     return this.boxscoresMap;
   }
 
+  //TODO:
   getLeagueInfo(){
     //get league info
     this.client.getLeagueInfo({seasonId: this.getSeasonId()});
   }
 
+  //TODO:
   getNFLGames(){
     //get all nfl games
     //this.client.getNFLGamesForPeriod({startDate: startDate, endDate: endDate});
 
-  }
-
-  getPlayers(){
-    //get free agents
-    //get proj and actual score by week
   }
 }

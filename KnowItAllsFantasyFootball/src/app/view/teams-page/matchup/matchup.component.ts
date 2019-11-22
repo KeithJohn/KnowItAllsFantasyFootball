@@ -20,7 +20,6 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { AppService } from 'src/app/model/services/app.service';
 import {BoxscorePlayer} from "../../../model/models/boxscore-player.model";
 
-
 @Component({
   selector: 'app-matchup',
   templateUrl: './matchup.component.html',
@@ -28,8 +27,6 @@ import {BoxscorePlayer} from "../../../model/models/boxscore-player.model";
 })
 export class MatchupComponent implements OnInit {
   boxScoreNumber:number = 1;
-  isLoadedTeams: boolean = false;
-  isLoadedMatchups: boolean = false;
   isLoadedLineups: boolean = false;
   leagueInfo:League;
   lineupInfo;
@@ -40,34 +37,15 @@ export class MatchupComponent implements OnInit {
 
   constructor(private appService: AppService,private leagueService: LeagueService ,private boxScoreService: BoxscoreService, private teamService: TeamService) {}
 
-
+//TODO: Move sort to seperate function for reuse
   ngOnInit() {
     this.getLineupInfo();
-    //console.log(this.appService.boxscoresMap);
-    //console.log(this.boxscoresMap.keys());
     this.boxscoresMap = this.appService.getBoxscoresMap();
     this.boxscoresForWeek = this.boxscoresMap.get(this.appService.getCurrentWeek());
-    console.log(this.boxscoresForWeek);
-    //console.log(this.appService.getCurrentWeek());
-    //console.log(this.boxscoresForWeek);
-    // this.getTeams()
-    //this.getMatchups();
+    this.getLineups();
+    this.currentBoxscore=this.boxscoresForWeek[0];
+    this.boxScoreService.getProjectedScores(this.boxscoresForWeek);
     let slideConfig = {"slidesToShow": 4, "slidesToScroll": 4}
-  }
-
-  // getTeams() {
-  //   this.teamService.getTeamsAtWeek(this.appService.getSeasonId(), this.appService.getCurrentWeek() - 1).subscribe(data => {
-  //     this.teams = data;
-  //     this.isLoadedTeams = true;
-  //   })
-  // }
-
-  //TODO: Add team name for away and home for boxscore.
-  getMatchups() {
-      //this.boxScoreService.getProjectedScores(this.boxscoresForWeek);
-      //this.getLineups();
-      this.currentBoxscore=this.boxscoresForWeek[0];
-      this.isLoadedMatchups = true;
   }
 
   getLineupInfo(){
@@ -334,7 +312,6 @@ export class MatchupComponent implements OnInit {
     this.isLoadedLineups = true;
   }
   onSlide(event){
-    console.log(parseInt(event.current.replace("ngb-slide-", ""), 10));
     let slideIndex=parseInt(event.current.replace("ngb-slide-", ""), 10);
     this.currentBoxscore=this.boxscoresForWeek[slideIndex];
   }

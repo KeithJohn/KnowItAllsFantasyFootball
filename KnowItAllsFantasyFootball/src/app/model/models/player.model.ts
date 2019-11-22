@@ -61,7 +61,7 @@ export class Player {
    *  'SUSPENSION'
    *  'TEN_DAY_DL'
    */
-  injuryStaus: InjuryStatus;
+  injuryStatus: String;
 
   /**
    *  Boolean representing whether or not the player is droppable.

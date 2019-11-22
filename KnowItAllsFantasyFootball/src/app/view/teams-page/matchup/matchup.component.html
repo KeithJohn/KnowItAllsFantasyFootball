@@ -2,22 +2,11 @@
 <!-- TODO: Beautify things -->
 
 <!-- TODO:
-        Add slider functionality for selecting matchup
-            - add indicator
-            - add buttons and sliding for moving between matchups
-            - add current matchup variable
-        Add projected points
-            - get projected points for each player for the week.
-            - get projected point for each team for the week by adding each boxscore player projected.
-        Add Actual points for player
-            - get from boxscore player raw stats.
-        Add actual stats for player
-            - get from boxscore player raw stats.
         Fix scroll bar
             - either hide or make look better.
         Beautify fonts
 -->
-<ngb-carousel *ngIf="isLoadedMatchups && isLoadedTeams" [interval]=0 [showNavigationArrows]="true" [showNavigationIndicators]="true" (slide)="onSlide($event)">
+<ngb-carousel [interval]=0 [showNavigationArrows]="true" [showNavigationIndicators]="true" (slide)="onSlide($event)">
   <ng-template ngbSlide *ngFor="let boxscore of boxscoresForWeek">
     <div style="background-color: coral; height: 22%; width:100%">
       <!-- Row 1 -->
@@ -70,16 +59,14 @@
             column 3: Away Player info component/div
       -->
   <div style="overflow-y: scroll; height: 78%; background-color: dimgray ">
-    <div *ngIf="isLoadedTeams && isLoadedMatchups">
+    <div>
       <div *ngFor="let player of currentBoxscore.homeRoster; index as i">
         <mat-grid-list cols="20" rowHeight="3rem">
 
           <mat-grid-tile [colspan]="9" [rowspan]="1">
             <div
               style="vertical-align: bottom; height:100%; width: 100%; background-color: white; border-bottom: 1px solid grey;">
-              <app-matchup-player [player]=currentBoxscore.homeRoster[i]>
-
-              </app-matchup-player>
+              <app-matchup-player [player]=currentBoxscore.homeRoster[i]></app-matchup-player>
             </div>
           </mat-grid-tile>
 
@@ -93,9 +80,7 @@
 
           <mat-grid-tile [colspan]="9" [rowspan]="1">
             <div style="height: 100%; width: 100%; background-color: white; border-bottom: 1px solid grey;">
-              <app-matchup-player [player]=currentBoxscore.awayRoster[i]>
-
-              </app-matchup-player>
+              <app-matchup-player [player]=currentBoxscore.awayRoster[i]></app-matchup-player>
             </div>
           </mat-grid-tile>
         </mat-grid-list>

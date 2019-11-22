@@ -19,10 +19,6 @@ export class BoxscoreService {
     this.client = new Client ({leagueId: appService.getLeagueId()})
    }
 
-   getBoxscores(seasonId: number, matchupPeriodId: number, scoringPeriodId: number):Observable<any> {
-     return from(this.client.getBoxscoreForWeek({ seasonId: seasonId, matchupPeriodId: matchupPeriodId, scoringPeriodId: scoringPeriodId }));
-   }
-
    getHistoricalScoreboardForWeek(seasonId: number, matchupPeriodId: number, scoringPeriodId: number): Observable<any> {
      return from(this.client.getHistoricalScoreboardForWeek({seasonId: seasonId, matchupPeriodId: matchupPeriodId, scoringPeriodId: scoringPeriodId}));
    }
@@ -32,6 +28,7 @@ export class BoxscoreService {
       boxscore.homeProjectedScore = 0;
       boxscore.awayProjectedScore = 0;
       boxscore.homeRoster.forEach(boxPlayer => {
+        boxPlayer.totalProjPoints = this.sumProjectedPoints(boxPlayer);
         if(boxPlayer.position != 'Bench'){
           boxscore.homeProjectedScore += this.sumProjectedPoints(boxPlayer);
         }

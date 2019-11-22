@@ -14,19 +14,4 @@ export class MatchupPlayerComponent implements OnInit {
   ngOnInit() {
   }
 
-  getPosition(): String{
-    if(this.player.player.eligiblePositions.includes("QB")){
-      return "QB";
-    }else if(this.player.player.eligiblePositions.includes("RB")){
-      return "RB";
-    }else if(this.player.player.eligiblePositions.includes("WR")){
-      return "WR";
-    }else if(this.player.player.eligiblePositions.includes("TE")){
-      return "TE";
-    }else if(this.player.player.eligiblePositions.includes("D/ST")){
-      return "D/ST";
-    }else if(this.player.player.eligiblePositions.includes("K")){
-      return "K";
-    }
-  }
 }

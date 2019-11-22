@@ -8,6 +8,7 @@
           <p *ngIf="player.player.lastName != 'D/ST'" style="display: inline; font-weight: bold; font-size: 1.5em">{{player.player.firstName.charAt(0)}} {{player.player.lastName}}, </p>
           <p *ngIf="player.player.lastName == 'D/ST'" style="display: inline; font-weight: bold; font-size: 1.5em">{{player.player.firstName}} {{player.player.lastName}}, </p>
           <p style="display: inline;">{{player.player.proTeamAbbreviation}}</p>
+          <p style="display: inline; color:red;" *ngIf="player.player.injuryStatus && player.player.injuryStatus != 'ACTIVE'"  >   {{player.player.injuryStatus.charAt(0)}}</p>
         </div>
       </div>
       <div style=" float:right; text-align: center; width: 20%; height: 100%;">
