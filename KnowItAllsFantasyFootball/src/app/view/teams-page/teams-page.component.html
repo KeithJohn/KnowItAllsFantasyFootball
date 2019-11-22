@@ -1,12 +1,12 @@
 <div style="width: 100%; height: 100%;">
   <!-- TODO: Beautify -->
   <mat-grid-list cols=2 rowHeight=2:.90>
-
     <mat-grid-tile [rowspan]="2">
       <mat-card style="width:95%; height:97.5%; background-color: #5F6366; overflow: hidden;">
-        <app-matchup></app-matchup>
+        <app-matchup [boxscoresMap]="boxscoresMap" [teamsMap]="teamsMap"></app-matchup>
       </mat-card>
     </mat-grid-tile>
+
 
     <!-- TODO -->
     <mat-grid-tile>
@@ -18,7 +18,7 @@
     <!-- TODO -->
     <mat-grid-tile>
       <mat-card style="width:95%; height:95%; background-color: #5F6366; color:white; overflow: hidden;">
-        <app-team-info></app-team-info>
+        <app-team-info [teamsMap]="teamsMap"></app-team-info>
       </mat-card>
     </mat-grid-tile>
 

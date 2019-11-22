@@ -2,32 +2,21 @@
 <!-- TODO: Beautify things -->
 
 <!-- TODO:
-        Add slider functionality for selecting matchup
-            - add indicator
-            - add buttons and sliding for moving between matchups
-            - add current matchup variable
-        Add projected points
-            - get projected points for each player for the week.
-            - get projected point for each team for the week by adding each boxscore player projected.
-        Add Actual points for player
-            - get from boxscore player raw stats.
-        Add actual stats for player
-            - get from boxscore player raw stats.
         Fix scroll bar
             - either hide or make look better.
         Beautify fonts
 -->
-<ngb-carousel *ngIf="isLoadedMatchups && isLoadedTeams" [interval]=0 [showNavigationArrows]="true" [showNavigationIndicators]="true" (slide)="onSlide($event)">
-  <ng-template ngbSlide *ngFor="let boxscore of boxscores">
+<ngb-carousel [interval]=0 [showNavigationArrows]="true" [showNavigationIndicators]="true" (slide)="onSlide($event)">
+  <ng-template ngbSlide *ngFor="let boxscore of boxscoresForWeek">
     <div style="background-color: coral; height: 22%; width:100%">
       <!-- Row 1 -->
       <div style="height:10rem; overflow:hidden;">
         <div style="width: 50%; text-align: center; height:100%; padding-top: 10px; float:left">
           <!-- Home team photo -->
           <img style="display:block; margin:auto; height:4.5rem"
-               src="{{teams[boxscore.homeTeamId - 1].logoURL}}">
+               src="{{teamsMap.get(boxscore.homeTeamId).logoURL}}">
           <!-- home team name -->
-          <h3>{{ teams[boxscore.homeTeamId - 1].name }} </h3>
+          <h3>{{ teamsMap.get(boxscore.homeTeamId).name }} </h3>
           <!-- home points scored -->
           <h4>{{ boxscore.homeScore }}</h4>
         </div>
@@ -35,9 +24,9 @@
         <div style="width: 50%; text-align: center; height:100%; padding-top: 10px; float:right">
           <!-- Away team photo -->
           <img style="display:block; margin:auto; height:4.5rem;"
-               src="{{teams[boxscore.awayTeamId - 1].logoURL}}">
+               src="{{teamsMap.get(boxscore.awayTeamId).logoURL}}">
           <!-- Away team name -->
-          <h3>{{ teams[boxscore.awayTeamId - 1].name }} </h3>
+          <h3>{{ teamsMap.get(boxscore.awayTeamId).name }} </h3>
           <!-- Away points scored -->
           <h4>{{ boxscore.awayScore }}</h4>
         </div>
@@ -69,17 +58,15 @@
             column 2: Position
             column 3: Away Player info component/div
       -->
-  <div *ngIf="isLoadedMatchups && isLoadedTeams" style="overflow-y: scroll; height: 72%; background-color: dimgray ">
-    <div *ngIf="isLoadedTeams && isLoadedMatchups">
+  <div style="overflow-y: scroll; height: 72%; background-color: dimgray ">
+    <div >
       <div *ngFor="let player of currentBoxscore.homeRoster; index as i">
         <mat-grid-list cols="20" rowHeight="3rem">
 
           <mat-grid-tile [colspan]="9" [rowspan]="1">
             <div
               style="vertical-align: bottom; height:100%; width: 100%; background-color: white; border-bottom: 1px solid grey;">
-              <app-matchup-player [player]=currentBoxscore.homeRoster[i]>
-
-              </app-matchup-player>
+              <app-matchup-player [player]=currentBoxscore.homeRoster[i]></app-matchup-player>
             </div>
           </mat-grid-tile>
 
@@ -93,9 +80,7 @@
 
           <mat-grid-tile [colspan]="9" [rowspan]="1">
             <div style="height: 100%; width: 100%; background-color: white; border-bottom: 1px solid grey;">
-              <app-matchup-player [player]=currentBoxscore.awayRoster[i]>
-
-              </app-matchup-player>
+              <app-matchup-player [player]=currentBoxscore.awayRoster[i]></app-matchup-player>
             </div>
           </mat-grid-tile>
         </mat-grid-list>

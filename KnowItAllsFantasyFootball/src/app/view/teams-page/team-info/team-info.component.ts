@@ -14,14 +14,11 @@ export class TeamInfoComponent implements OnInit {
   @ViewChild(MatSelect, {static: false}) select: MatSelect;
   // TODO: set up selection of current team.
   // TODO: calculate projected stats (possibly move to team services)
-  currentTeamId: number = null;
-  teams: Team[];
-  constructor(private appService: AppService,private teamService: TeamService) { }
+  currentTeamId: number;
+  @Input() teamsMap;
+  constructor() { }
 
   ngOnInit() {
-    this.teamService.getTeamsAtWeek(this.appService.seasonId, this.appService.currentWeek).subscribe(data => {
-      this.teams = data;
-    });
   }
   
 }
