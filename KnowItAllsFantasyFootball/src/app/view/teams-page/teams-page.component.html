@@ -1,25 +1,26 @@
 <div style="width: 100%; height: 100%;">
-<!-- TODO: Beautify -->
-<mat-grid-list cols=2 rowHeight=2:.90>
+  <!-- TODO: Beautify -->
+  <mat-grid-list cols=2 rowHeight=2:.90>
 
-  <!-- TODO: Add slider for list -->
-  <mat-grid-tile [rowspan]="2" [style.background]='lightblue'>
-    <div style="background-color: lightblue; width: 95%; height: 95%;">
-      <app-matchup></app-matchup>
-    </div>
-  </mat-grid-tile>
+    <mat-grid-tile [rowspan]="2">
+      <mat-card style="width:95%; height:97.5%; background-color: #5F6366; overflow: hidden;">
+        <app-matchup></app-matchup>
+      </mat-card>
+    </mat-grid-tile>
 
-  <!-- TODO -->
-  <mat-grid-tile>
-    <div style="background-color: lightcoral; width: 95%; height: 95%;">Team Graphs</div>
-  </mat-grid-tile>
+    <!-- TODO -->
+    <mat-grid-tile>
+      <mat-card style="width:95%; height:95%; background-color: #5F6366; color:white; overflow: hidden;">
+        <app-team-graph></app-team-graph>
+      </mat-card>
+    </mat-grid-tile>
 
-  <!-- TODO -->
-  <mat-grid-tile>
-    <div style="background-color: lightgreen; width: 95%; height: 95%;">
-      <app-team-info></app-team-info>
-    </div>
-  </mat-grid-tile>
+    <!-- TODO -->
+    <mat-grid-tile>
+      <mat-card style="width:95%; height:95%; background-color: #5F6366; color:white; overflow: hidden;">
+        <app-team-info></app-team-info>
+      </mat-card>
+    </mat-grid-tile>
 
-</mat-grid-list>
+  </mat-grid-list>
 </div>

@@ -26,10 +26,10 @@
 
     <!-- TODO: -->
     <mat-grid-tile [rowspan]="2">
-        <div style="width: 95%; height: 95%; margin: 1rem;">
-            <app-player-list (currentPlayer)="setCurrentPlayer($event)"></app-player-list>
-        </div>
-    </mat-grid-tile>
+            <mat-card style="width:95%; height:97.5%; background-color: #5F6366;">
+                <app-player-list (currentPlayer)="setCurrentPlayer($event)"></app-player-list>
+            </mat-card>
+          </mat-grid-tile>
 
   <!-- TODO -->
     <mat-grid-tile>

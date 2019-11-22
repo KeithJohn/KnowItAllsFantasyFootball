@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Team } from 'src/app/model/models/team.model';
 import {TeamService} from "../../../model/services/team.service";
 import {AppService} from "../../../model/services/app.service";
+import { MatSelect } from '@angular/material';
 
 @Component({
   selector: 'app-team-info',
@@ -9,9 +10,11 @@ import {AppService} from "../../../model/services/app.service";
   styleUrls: ['./team-info.component.sass']
 })
 export class TeamInfoComponent implements OnInit {
+
+  @ViewChild(MatSelect, {static: false}) select: MatSelect;
   // TODO: set up selection of current team.
   // TODO: calculate projected stats (possibly move to team services)
-  currentTeamId: number;
+  currentTeamId: number = null;
   teams: Team[];
   constructor(private appService: AppService,private teamService: TeamService) { }
 
@@ -20,5 +23,5 @@ export class TeamInfoComponent implements OnInit {
       this.teams = data;
     });
   }
-
+  
 }
