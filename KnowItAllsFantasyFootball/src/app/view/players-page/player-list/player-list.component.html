@@ -39,48 +39,63 @@
                        color-stop(.5, transparent), to(transparent));
 }
 </style>
-
-<!-- TODO: make similar to how Matchup is set up
-    TODO: beautify
--->
-
-<!-- Filter bar -->
-    <div class="toolbar" role="banner">
-        <div class="spacer"></div>
-        <mat-form-field color=white class="toolbar" style="padding:5px;">
-            <mat-select color=white class="myClass" placeholder="Position" [(ngModel)]="currentPositionFilter">
-                    <mat-option >All</mat-option>
-                    <mat-option value="QB">QB</mat-option>
-                    <mat-option value="RB">RB</mat-option>
-                    <mat-option value="WR">WR</mat-option>
-                    <mat-option value="TE">TE</mat-option>
-                    <mat-option value="D/ST">D/ST</mat-option>
-                    <mat-option value="K">K</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-select placeholder="Team" [(ngModel)]="currentTeamFilter">
-                    <mat-option>All</mat-option>
-                    <mat-option *ngFor="let team of teams" [value]="team.id">{{team.name}}</mat-option>
-                    <mat-option value="0">Free Agent</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-select placeholder="Sort By" [(ngModel)]=orderByType>
-                    <mat-option></mat-option>
-                    <mat-option value="-auctionValueAverage">Average Auction Value </mat-option>
-                    <mat-option value="-percentChange">Transaction Trends</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Name" [(ngModel)]="searchText">
-        </mat-form-field>
-    </div>
-
-    <!-- List -->
-    <!-- TODO: Add Scrolling -->
     <!-- TODO: https://stackoverflow.com/questions/8660149/need-to-make-a-clickable-div-button -->
-        <mat-action-list>
-            <button class="playerListItem" *ngFor="let player of players | filterByPosition: currentPositionFilter | filterByTeam: currentTeamFilter  | filterByName : searchText | orderBy: orderByType; let i = index" mat-list-item (click)="setPlayer(player)">{{ player.fullName }}: {{ getPosition(player) }}, {{ player.teamName }}, || percentChange {{ player.percentChange | number:'.1-5'  }} || AAV {{ player.auctionValueAverage | number:'.1-5' }}</button>
-        </mat-action-list>
 
+        <div style="height:100%">
+            <!-- Filter bar -->
+            <div class="toolbar" style="height: 10%">
+                <!-- Positon filter -->
+                <div style="padding-left:5px;">
+                    <mat-form-field style="padding-left: 5px;">
+                        <mat-select placeholder="Position" [(ngModel)]="currentPositionFilter">
+                            <mat-option>All</mat-option>
+                            <mat-option value="QB">QB</mat-option>
+                            <mat-option value="RB">RB</mat-option>
+                            <mat-option value="WR">WR</mat-option>
+                            <mat-option value="TE">TE</mat-option>
+                            <mat-option value="D/ST">D/ST</mat-option>
+                            <mat-option value="K">K</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <!-- Team filter -->
+                <div style="padding-left:5px;">
+                    <mat-form-field>
+                        <mat-select placeholder="Team" [(ngModel)]="currentTeamFilter">
+                            <mat-option>All</mat-option>
+                            <mat-option *ngFor="let team of teams" [value]="team.id">{{team.name}}</mat-option>
+                            <mat-option value="0">Free Agent</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <!-- Sort by -->
+                <div style="padding-left:5px;">
+                    <mat-form-field>
+                        <mat-select placeholder="Sort By" [(ngModel)]=orderByType>
+                            <mat-option></mat-option>
+                            <mat-option value="-auctionValueAverage">Average Auction Value</mat-option>
+                            <mat-option value="-percentChange">Transaction Trends</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <!-- Name filter -->
+                <div style="padding-left:5px;">
+                    <mat-form-field>
+                        <input matInput placeholder="Name" [(ngModel)]="searchText">
+                    </mat-form-field>
+                </div>
+            
+            </div>
+
+            <!-- Scrolling players list-->
+            <div style="overflow-y: scroll; height:90%; background-color: dimgray;">
+                <div *ngFor="let player of players | filterByPosition: currentPositionFilter | filterByTeam: currentTeamFilter | filterByName : searchText | orderBy: orderByType;">
+                    <div style="padding-left: 5px; vertical-align: bottom; height:100%; width: 100%; background-color: white; border-bottom: 1px solid grey;">
+                        <app-player-list-item [player]=player></app-player-list-item>     
+                    </div>
+                </div>
+            </div>
+        </div>

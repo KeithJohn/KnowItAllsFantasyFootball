@@ -2,7 +2,7 @@
 <!-- TODO: Add more info to be shown -->
 <!-- TODO: get info from current team -->
 <!-- TODO: add drop down select for selecting team -->
-<div style="width: 50%; float:left">
+<div class="team-info-left-item-container">
   <mat-form-field>
       <mat-select #MatSelect placeholder="Team" [(ngModel)]="currentTeamId" >
           <mat-option *ngFor="let team of teams" [value]="team.id">{{team.name}}</mat-option>
@@ -10,23 +10,23 @@
   </mat-form-field>
 </div>
 <div *ngIf="currentTeamId">
-  <div style="float: left;">
+  <div class="team-info-left-item-container" > <!-- </div>style="float: left;"> -->
     <h2>{{ teams[currentTeamId - 1].name }}</h2>
   </div>
 
-  <div style="width: 50%; float: right; padding:0px;">
+  <div class="team-info-right-item-container">
     <h3>Record: </h3>
     <p style="padding-bottom: 0px;">wins: {{ teams[currentTeamId - 1].wins }} losses: {{ teams[currentTeamId - 1].losses }} ties: {{ teams[currentTeamId - 1].ties }}</p>
     <p>winning percentage: {{teams[currentTeamId-1].winningPercentage}}%</p>
   </div>
 
-  <div style="width: 50%; float: left;">
+  <div class="team-info-left-item-container">
     <h3>Score:</h3>
     <p>total points scored: {{teams[currentTeamId-1].regularSeasonPointsFor}}</p>
     <p>total points against: {{teams[currentTeamId-1].regularSeasonPointsAgainst}}</p>
   </div>
 
-  <div style="width:50%; float: left;">
+  <div class="team-info-left-item-container">
     <h3>Standings: </h3>
     <p>current playoff seed: {{teams[currentTeamId-1].playoffSeed}}</p>
     <p>final standings position: {{teams[currentTeamId-1].finalStandingsPosition}}</p>

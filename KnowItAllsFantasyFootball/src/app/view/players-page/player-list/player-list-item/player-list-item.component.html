@@ -1,9 +1,14 @@
 <style>
 
 </style>
-<!-- TODO: Add better styling and formatting -->
-    <p>{{ player.fullName }}:    {{ playerPosition }}    {{ player.teamName }}</p>
+<div class="grid-container" style="height: 100%">
+    <div style="width:100%; background-color: white;">
+            <p>{{ player.fullName }}: {{ getPosition(player) }}, {{ player.teamName }}, || percentChange {{ player.percentChange | number:'.1-5'  }} || AAV {{ player.auctionValueAverage | number:'.1-5' }}</p>
+    </div>
+        
+</div>
 
-    <mat-divider></mat-divider>
+<!-- TODO: Add better styling and formatting -->
+
     
 

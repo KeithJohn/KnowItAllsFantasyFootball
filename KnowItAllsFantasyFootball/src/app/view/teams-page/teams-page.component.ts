@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { AppService } from 'src/app/model/services/app.service';
 import {Player} from "../../model/models/player.model";
 import {Team} from "../../model/models/team.model";

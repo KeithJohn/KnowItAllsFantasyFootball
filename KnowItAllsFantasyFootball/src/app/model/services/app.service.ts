@@ -143,10 +143,10 @@ export class AppService {
     this.playerMap = new Map<number, any>();
     //Populate map
     //TODO: Figure out why this won't use client
-    let currentFreeAgentRequest = service.http.get(`https://fantasy.espn.com/apis/v3/games/ffl/seasons/2019/segments/0/leagues/58438855?scoringPeriodId=${service.getCurrentWeek()}&view=kona_player_info`).toPromise();//this.client.getFreeAgents(2019, 1);
+    let currentFreeAgentRequest = service.client.getFreeAgents({seasonId: service.seasonId, scoringPeriodId: service.currentWeek});
     return new Promise(function(resolve, reject)  {
       currentFreeAgentRequest.then(playersList => {
-        let freeAgents: FreeAgent[] = playersList['players'];
+        let freeAgents: FreeAgent[] = playersList;
         freeAgents.forEach(freeAgent => {
           let player = freeAgent.player;
           player.seasonRawStats = freeAgent.rawStats;

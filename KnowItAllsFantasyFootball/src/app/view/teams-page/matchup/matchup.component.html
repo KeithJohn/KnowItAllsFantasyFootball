@@ -8,12 +8,12 @@
 -->
 <ngb-carousel [interval]=0 [showNavigationArrows]="true" [showNavigationIndicators]="true" (slide)="onSlide($event)">
   <ng-template ngbSlide *ngFor="let boxscore of boxscoresForWeek">
-    <div style="background-color: coral; height: 22%; width:100%">
+    <div class="matchup-header">
       <!-- Row 1 -->
-      <div style="height:10rem; overflow:hidden;">
-        <div style="width: 50%; text-align: center; height:100%; padding-top: 10px; float:left">
+      <div class="matchup-team-info-container">
+        <div class="matchup-home-team-container">
           <!-- Home team photo -->
-          <img style="display:block; margin:auto; height:4.5rem"
+          <img class="matchup-team-photo"
                src="{{teamsMap.get(boxscore.homeTeamId).logoURL}}">
           <!-- home team name -->
           <h3>{{ teamsMap.get(boxscore.homeTeamId).name }} </h3>
@@ -21,9 +21,9 @@
           <h4>{{ boxscore.homeScore }}</h4>
         </div>
 
-        <div style="width: 50%; text-align: center; height:100%; padding-top: 10px; float:right">
+        <div class="matchup-away-team-container">
           <!-- Away team photo -->
-          <img style="display:block; margin:auto; height:4.5rem;"
+          <img class="matchup-team-photo"
                src="{{teamsMap.get(boxscore.awayTeamId).logoURL}}">
           <!-- Away team name -->
           <h3>{{ teamsMap.get(boxscore.awayTeamId).name }} </h3>
@@ -33,14 +33,14 @@
       </div>
 
       <!-- Row 2 -->
-      <div style="background-color: dimgray; height: 2.4rem; color:lightgray;">
-        <div style="width: 50%; display: inline-block; padding-left: 10px; vertical-align: center">
+      <div class="matchup-projected-header">
+        <div class="matchup-home-projected">
           <!-- home team projected -->
           <p>proj: {{ boxscore.homeProjectedScore | number :'1.2-2' }}</p>
 
           <p>{{ boxscore.awayProjectedScore }}</p>
         </div>
-        <div style="width:50%; text-align:right; float: right; padding-right: 10px">
+        <div class="matchup-away-projected">
           <!-- away team projected -->
           <p>proj: {{ boxscore.awayProjectedScore | number :'1.2-2' }}</p>
         </div>
@@ -58,14 +58,13 @@
             column 2: Position
             column 3: Away Player info component/div
       -->
-  <div style="overflow-y: scroll; height: 72%; background-color: dimgray ">
+  <div class="matchup-player-list">
     <div >
       <div *ngFor="let player of currentBoxscore.homeRoster; index as i">
         <mat-grid-list cols="20" rowHeight="3rem">
 
           <mat-grid-tile [colspan]="9" [rowspan]="1">
-            <div
-              style="vertical-align: bottom; height:100%; width: 100%; background-color: white; border-bottom: 1px solid grey;">
+            <div class="matchup-" style="vertical-align: bottom; height:100%; width: 100%; background-color: white; border-bottom: 1px solid grey;">
               <app-matchup-player [player]=currentBoxscore.homeRoster[i]></app-matchup-player>
             </div>
           </mat-grid-tile>

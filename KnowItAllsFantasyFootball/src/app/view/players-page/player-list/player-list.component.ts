@@ -4,6 +4,7 @@ import {TeamService} from "../../../model/services/team.service";
 import {FreeAgent} from "../../../model/models/free-agent-player.model";
 import {Team} from "../../../model/models/team.model";
 import {Player} from "../../../model/models/player.model";
+import { ArrayDataSource } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-player-list',
@@ -12,6 +13,7 @@ import {Player} from "../../../model/models/player.model";
   providers: []
 })
 export class PlayerListComponent implements OnInit {
+  @Input() playersMap: Map<number, Player>;
   @Output() currentPlayer = new EventEmitter<Player>();
   freeAgents: FreeAgent[] =[];
   teams: Team[] = [];
@@ -28,7 +30,15 @@ export class PlayerListComponent implements OnInit {
   //TODO: Beautify everything / Clean up
 
   ngOnInit() {
-    this.getAllPlayers(2019, 10);
+    //this.getAllPlayers(2019, 10);
+    this.players = this.getPlayers();
+    console.log(this.players);
+    
+  }
+
+  getPlayers(){
+    //console.log(this.playersMap);
+    return Array.from(this.playersMap.values());
   }
 
   getAllPlayers(seasonId: number, scoringPeriodId: number){
@@ -46,7 +56,7 @@ export class PlayerListComponent implements OnInit {
         this.freeAgentService.getFreeAgents(seasonId, scoringPeriodId).subscribe(data => {
           let freeAgents: FreeAgent[] = data;
           freeAgents.forEach(freeAgent => {
-            console.log(freeAgent);
+            //console.log(freeAgent);
             var teamInfo = this.getTeamInfo(freeAgent.player)
             freeAgent.player.teamId = teamInfo.teamId;
             freeAgent.player.teamName = teamInfo.teamName;

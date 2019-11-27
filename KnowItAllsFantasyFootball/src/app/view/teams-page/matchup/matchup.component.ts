@@ -1,24 +1,10 @@
-import {
-  Component, Input,
-  OnInit
-} from '@angular/core';
-import {
-  Team
-} from 'src/app/model/models/team.model';
-import {
-  BoxscoreService
-} from 'src/app/model/services/boxscore.service';
-import {
-  Boxscore
-} from 'src/app/model/models/boxscore.model';
-import {
-  TeamService
-} from 'src/app/model/services/team.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { BoxscoreService } from 'src/app/model/services/boxscore.service';
+import { Boxscore } from 'src/app/model/models/boxscore.model';
+import { TeamService } from 'src/app/model/services/team.service';
 import { League } from 'src/app/model/models/league.model';
 import { LeagueService } from 'src/app/model/services/league.service';
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { AppService } from 'src/app/model/services/app.service';
-import {BoxscorePlayer} from "../../../model/models/boxscore-player.model";
 
 @Component({
   selector: 'app-matchup',
@@ -26,29 +12,29 @@ import {BoxscorePlayer} from "../../../model/models/boxscore-player.model";
   styleUrls: ['./matchup.component.sass']
 })
 export class MatchupComponent implements OnInit {
-  boxScoreNumber:number = 1;
+  boxScoreNumber: number = 1;
   isLoadedLineups: boolean = false;
-  leagueInfo:League;
+  leagueInfo: League;
   lineupInfo;
   @Input() teamsMap;
   currentBoxscore: Boxscore;
   @Input() boxscoresMap: Map<number, Boxscore[]>;
   boxscoresForWeek: Boxscore[];
 
-  constructor(private appService: AppService,private leagueService: LeagueService ,private boxScoreService: BoxscoreService, private teamService: TeamService) {}
+  constructor(private appService: AppService, private leagueService: LeagueService, private boxScoreService: BoxscoreService, private teamService: TeamService) { }
 
-//TODO: Move sort to seperate function for reuse
+  //TODO: Move sort to seperate function for reuse
   ngOnInit() {
     this.getLineupInfo();
     this.boxscoresMap = this.appService.getBoxscoresMap();
     this.boxscoresForWeek = this.boxscoresMap.get(this.appService.getCurrentWeek());
     this.getLineups();
-    this.currentBoxscore=this.boxscoresForWeek[0];
+    this.currentBoxscore = this.boxscoresForWeek[0];
     this.boxScoreService.getProjectedScores(this.boxscoresForWeek);
-    let slideConfig = {"slidesToShow": 4, "slidesToScroll": 4}
+    let slideConfig = { "slidesToShow": 4, "slidesToScroll": 4 }
   }
 
-  getLineupInfo(){
+  getLineupInfo() {
     this.leagueService.getLeagueInfo(this.appService.getSeasonId()).subscribe(data => {
       this.leagueInfo = data;
 
@@ -57,83 +43,83 @@ export class MatchupComponent implements OnInit {
   }
 
   getLineups() {
-    this.boxscoresForWeek[this.boxScoreNumber].homeRoster.sort(function(a, b) {
-      var aPos:number;
-      var bPos:number;
-      switch (a.position){
+    this.boxscoresForWeek[this.boxScoreNumber].homeRoster.sort(function (a, b) {
+      var aPos: number;
+      var bPos: number;
+      switch (a.position) {
         case 'QB': {
-          aPos=1;
+          aPos = 1;
           break;
         }
         case 'RB': {
-          aPos=2;
+          aPos = 2;
           break;
         }
         case 'WR': {
-          aPos=3;
+          aPos = 3;
           break;
         }
         case 'TE': {
-          aPos=4;
+          aPos = 4;
           break;
         }
         case 'RB/WR/TE': {
-          aPos=5;
+          aPos = 5;
           break;
         }
         case 'D/ST': {
-          aPos=6;
+          aPos = 6;
           break;
         }
         case 'K': {
-          aPos=7;
+          aPos = 7;
           break;
         }
         case 'Bench': {
-          aPos=8;
+          aPos = 8;
           break;
         }
         default: {
-          aPos=9;
+          aPos = 9;
           break;
         }
       }
 
-      switch (b.position){
+      switch (b.position) {
         case 'QB': {
-          bPos=1;
+          bPos = 1;
           break;
         }
         case 'RB': {
-          bPos=2;
+          bPos = 2;
           break;
         }
         case 'WR': {
-          bPos=3;
+          bPos = 3;
           break;
         }
         case 'TE': {
-          bPos=4;
+          bPos = 4;
           break;
         }
         case 'RB/WR/TE': {
-          bPos=5;
+          bPos = 5;
           break;
         }
         case 'D/ST': {
-          bPos=6;
+          bPos = 6;
           break;
         }
         case 'K': {
-          bPos=7;
+          bPos = 7;
           break;
         }
         case 'Bench': {
-          bPos=8;
+          bPos = 8;
           break;
         }
         default: {
-          bPos=9;
+          bPos = 9;
           break;
         }
       }
@@ -141,166 +127,166 @@ export class MatchupComponent implements OnInit {
     });
 
     this.boxscoresForWeek.forEach(boxscore => {
-      boxscore.homeRoster.sort(function(a, b) {
-        var aPos:number;
-        var bPos:number;
+      boxscore.homeRoster.sort(function (a, b) {
+        var aPos: number;
+        var bPos: number;
         //Give position numeric value for presentation in list
-        switch (a.position){
+        switch (a.position) {
           case 'QB': {
-            aPos=1;
+            aPos = 1;
             break;
           }
           case 'RB': {
-            aPos=2;
+            aPos = 2;
             break;
           }
           case 'WR': {
-            aPos=3;
+            aPos = 3;
             break;
           }
           case 'TE': {
-            aPos=4;
+            aPos = 4;
             break;
           }
           case 'RB/WR/TE': {
-            aPos=5;
+            aPos = 5;
             break;
           }
           case 'D/ST': {
-            aPos=6;
+            aPos = 6;
             break;
           }
           case 'K': {
-            aPos=7;
+            aPos = 7;
             break;
           }
           case 'Bench': {
-            aPos=8;
+            aPos = 8;
             break;
           }
           default: {
-            aPos=9;
+            aPos = 9;
             break;
           }
         }
-        switch (b.position){
+        switch (b.position) {
           case 'QB': {
-            bPos=1;
+            bPos = 1;
             break;
           }
           case 'RB': {
-            bPos=2;
+            bPos = 2;
             break;
           }
           case 'WR': {
-            bPos=3;
+            bPos = 3;
             break;
           }
           case 'TE': {
-            bPos=4;
+            bPos = 4;
             break;
           }
           case 'RB/WR/TE': {
-            bPos=5;
+            bPos = 5;
             break;
           }
           case 'D/ST': {
-            bPos=6;
+            bPos = 6;
             break;
           }
           case 'K': {
-            bPos=7;
+            bPos = 7;
             break;
           }
           case 'Bench': {
-            bPos=8;
+            bPos = 8;
             break;
           }
           default: {
-            bPos=9;
+            bPos = 9;
             break;
           }
         }
         return aPos - bPos;
       });
 
-      boxscore.awayRoster.sort(function(a, b) {
-        var aPos:number;
-        var bPos:number;
+      boxscore.awayRoster.sort(function (a, b) {
+        var aPos: number;
+        var bPos: number;
         //Give position numeric value for presentation in list
-        switch (a.position){
+        switch (a.position) {
           case 'QB': {
-            aPos=1;
+            aPos = 1;
             break;
           }
           case 'RB': {
-            aPos=2;
+            aPos = 2;
             break;
           }
           case 'WR': {
-            aPos=3;
+            aPos = 3;
             break;
           }
           case 'TE': {
-            aPos=4;
+            aPos = 4;
             break;
           }
           case 'RB/WR/TE': {
-            aPos=5;
+            aPos = 5;
             break;
           }
           case 'D/ST': {
-            aPos=6;
+            aPos = 6;
             break;
           }
           case 'K': {
-            aPos=7;
+            aPos = 7;
             break;
           }
           case 'Bench': {
-            aPos=8;
+            aPos = 8;
             break;
           }
           default: {
-            aPos=9;
+            aPos = 9;
             break;
           }
         }
-        switch (b.position){
+        switch (b.position) {
           case 'QB': {
-            bPos=1;
+            bPos = 1;
             break;
           }
           case 'RB': {
-            bPos=2;
+            bPos = 2;
             break;
           }
           case 'WR': {
-            bPos=3;
+            bPos = 3;
             break;
           }
           case 'TE': {
-            bPos=4;
+            bPos = 4;
             break;
           }
           case 'RB/WR/TE': {
-            bPos=5;
+            bPos = 5;
             break;
           }
           case 'D/ST': {
-            bPos=6;
+            bPos = 6;
             break;
           }
           case 'K': {
-            bPos=7;
+            bPos = 7;
             break;
           }
           case 'Bench': {
-            bPos=8;
+            bPos = 8;
             break;
           }
           default: {
-            bPos=9;
+            bPos = 9;
             break;
           }
         }
@@ -311,8 +297,8 @@ export class MatchupComponent implements OnInit {
 
     this.isLoadedLineups = true;
   }
-  onSlide(event){
-    let slideIndex=parseInt(event.current.replace("ngb-slide-", ""), 10);
-    this.currentBoxscore=this.boxscoresForWeek[slideIndex];
+  onSlide(event) {
+    let slideIndex = parseInt(event.current.replace("ngb-slide-", ""), 10);
+    this.currentBoxscore = this.boxscoresForWeek[slideIndex];
   }
 }
